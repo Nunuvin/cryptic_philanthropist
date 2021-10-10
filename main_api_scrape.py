@@ -31,8 +31,10 @@ def scrape_giveaways():
     '''
     global saveFiles
 
-    tweetsByHashtag = "https://api.twitter.com/2/tweets/search/recent?query=(giveaway crypto)&tweet.fields=conversation_id,in_reply_to_user_id,author_id,referenced_tweets,source,text,id&expansions=author_id,entities.mentions.username,in_reply_to_user_id,referenced_tweets.id,referenced_tweets.id.author_id&max_results=100"
+    tweetsByHashtag = "https://api.twitter.com/2/tweets/search/recent?query=%23crypto%20%23giveaway%20(tag%20OR%20comment)%20-is%3Aretweet%20-is%3Areply%20-is%3Aquote&tweet.fields=conversation_id,in_reply_to_user_id,author_id,referenced_tweets,source,text,id,public_metrics&expansions=author_id,entities.mentions.username,in_reply_to_user_id,referenced_tweets.id,referenced_tweets.id.author_id&max_results=100"
 
+    # nasa_tweets = 'https://api.twitter.com/1.1/search/tweets.json?q=crypto%20giveaway&result_type=popular&since_id=1417454251299819520&count=15'
+    # nasa_tweets2 = "https://api.twitter.com/1.1/search/tweets.json?max_id=1446475489359585283&q=nasa&include_entities=1&result_type=popular"
     get_req(saveFiles["giveawayTweets"], tweetsByHashtag, debug=False)
 
 def main():
