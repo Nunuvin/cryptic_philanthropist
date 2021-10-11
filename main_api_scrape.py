@@ -1,29 +1,35 @@
 import requests
 import json
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 envBear = {}
+envBear['BEARER_TOKEN'] = os.getenv('BEARER_TOKEN')
+
+
 saveFiles = {
-    "giveawayTweets" : "giveaway.json"
+    "giveawayTweets" : "Outputs/giveaway.json"
 }
 
-searchFollowupUrl = " https://api.twitter.com/2/tweets/search/recent?query=conversation_id:1445052091051876352&tweet.fields=in_reply_to_user_id,author_id,created_at,conversation_id&max_results=100&next_token=b26v89c19zqg8o3fpds84kv5lha4omoyjy3qvfhohy64d"
+# searchFollowupUrl = " https://api.twitter.com/2/tweets/search/recent?query=conversation_id:1445052091051876352&tweet.fields=in_reply_to_user_id,author_id,created_at,conversation_id&max_results=100&next_token=b26v89c19zqg8o3fpds84kv5lha4omoyjy3qvfhohy64d"
 
 
 
 
-def load_bearer_token():
-    '''
-    Reads .bear file and writes data into env dictionary
-    .bear Format:
-    bearer_token = TOKENVALUE
-    '''
-    global envBear
-    with open(".bear","r") as f:
-        lines = f.readlines()
-        for l in lines[1:]:
-            l = l.split(" ")
-            envBear[l[0]] = l[2]
-        #print(envBear)
+# def load_bearer_token():
+#     '''
+#     Reads .bear file and writes data into env dictionary
+#     .bear Format:
+#     bearer_token = TOKENVALUE
+#     '''
+#     global envBear
+#     with open(".bear","r") as f:
+#         lines = f.readlines()
+#         for l in lines[1:]:
+#             l = l.split(" ")
+#             envBear[l[0]] = l[2]
+#         #print(envBear)
 
 def scrape_giveaways():
     '''
@@ -38,7 +44,7 @@ def scrape_giveaways():
     get_req(saveFiles["giveawayTweets"], tweetsByHashtag, debug=False)
 
 def main():
-    load_bearer_token() #load env vals
+    #load_bearer_token() #load env vals
     scrape_giveaways()
 
 
@@ -59,7 +65,7 @@ def bearer_oauth(r):
     Method required by bearer token authentication.
     """
 
-    r.headers["Authorization"] = f"Bearer {envBear['bearer_token']}"
+    r.headers["Authorization"] = f"Bearer {envBear['BEARER_TOKEN']}"
     r.headers["User-Agent"] = "v2RecentSearchPython"
     return r
 
