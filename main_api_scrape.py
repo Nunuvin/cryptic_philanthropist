@@ -7,7 +7,6 @@ load_dotenv()
 envBear = {}
 envBear['BEARER_TOKEN'] = os.getenv('BEARER_TOKEN')
 
-
 saveFiles = {
     "giveawayTweets" : "Outputs/giveaway.json"
 }
@@ -41,7 +40,27 @@ def scrape_giveaways():
 
     # nasa_tweets = 'https://api.twitter.com/1.1/search/tweets.json?q=crypto%20giveaway&result_type=popular&since_id=1417454251299819520&count=15'
     # nasa_tweets2 = "https://api.twitter.com/1.1/search/tweets.json?max_id=1446475489359585283&q=nasa&include_entities=1&result_type=popular"
-    get_req(saveFiles["giveawayTweets"], tweetsByHashtag, debug=False)
+
+    #get first json
+    reqJson = get_req(saveFiles["giveawayTweets"], tweetsByHashtag, debug=False).json()
+    reqData = reqJson["data"]
+
+    #loop to get the rest
+    MaxCnt = 160
+    i = 1
+    while i < MaxCnt:
+        i += 1  
+        
+        nxtToken = reqJson["meta"]["next_token"]
+        print (nxtToken)
+
+        roundUrl = tweetsByHashtag + '&next_token=' + nxtToken
+        reqJson=get_req(saveFiles["giveawayTweets"], roundUrl, debug=False).json()
+        reqData.extend(reqJson["data"])
+
+    # write to file
+    with open(saveFiles["giveawayTweets"], 'w') as f:
+        json.dump(reqData, f)
 
 def main():
     #load_bearer_token() #load env vals
@@ -53,8 +72,7 @@ def main():
 def get_req(outputFilename, reqUrl, debug=False):
     r = requests.get(reqUrl, auth=bearer_oauth)
     if debug == False:
-        with open(outputFilename, 'w') as outfile:
-            json.dump(r.json(), outfile)
+        return r
     else:
         print(r.json())
 
