@@ -34,7 +34,7 @@ saveFiles = {
 def save_json_to_file(reqData):
     with open(saveFiles["giveawayTweets"], 'w') as f:
                 json.dump(reqData, f)
-            exit()
+                exit()
 
 def scrape_giveaways():
     '''
