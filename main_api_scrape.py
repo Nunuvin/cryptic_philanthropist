@@ -36,7 +36,7 @@ def scrape_giveaways():
     '''
     global saveFiles
 
-    tweetsByHashtag = "https://api.twitter.com/2/tweets/search/recent?query=%23crypto%20%23giveaway%20(tag%20OR%20comment)%20-is%3Aretweet%20-is%3Areply%20-is%3Aquote&tweet.fields=conversation_id,in_reply_to_user_id,author_id,referenced_tweets,source,text,id,public_metrics&expansions=author_id,entities.mentions.username,in_reply_to_user_id,referenced_tweets.id,referenced_tweets.id.author_id&max_results=100"
+    tweetsByHashtag = "https://api.twitter.com/2/tweets/search/recent?query=%23crypto%20%23giveaway%20(tag%20OR%20comment)%20-is%3Aretweet%20-is%3Areply%20-is%3Aquote&tweet.fields=conversation_id,in_reply_to_user_id,author_id,referenced_tweets,source,text,id,public_metrics&expansions=author_id,entities.mentions.username,in_reply_to_user_id,referenced_tweets.id,referenced_tweets.id.author_id&max_results=10"
 
     # nasa_tweets = 'https://api.twitter.com/1.1/search/tweets.json?q=crypto%20giveaway&result_type=popular&since_id=1417454251299819520&count=15'
     # nasa_tweets2 = "https://api.twitter.com/1.1/search/tweets.json?max_id=1446475489359585283&q=nasa&include_entities=1&result_type=popular"
@@ -46,19 +46,29 @@ def scrape_giveaways():
     reqData = reqJson["data"]
 
     #loop to get the rest
-    MaxCnt = 160
+    MaxCnt = 50
     i = 1
     while i < MaxCnt:
         i += 1  
         
-        nxtToken = reqJson["meta"]["next_token"]
-        print (nxtToken)
+        try:
+            nxtToken = reqJson["meta"]["next_token"]
+        
+        except Exception as e:
+            print (nxtToken)
+            print("issue at: ",i,"Error:\n")
+            print(e)
+            with open(saveFiles["giveawayTweets"], 'w') as f:
+                json.dump(reqData, f)
+            exit()
 
-        roundUrl = tweetsByHashtag + '&next_token=' + nxtToken
+        #print (nxtToken)
+
+        roundUrl = tweetsByHashtag + '&next_token=' + str(nxtToken)
         reqJson=get_req(saveFiles["giveawayTweets"], roundUrl, debug=False).json()
         reqData.extend(reqJson["data"])
-        if i % 10:
-            print(i)
+        if i % 5 == 0:
+            print("at: " + str(i))
 
     # write to file
     with open(saveFiles["giveawayTweets"], 'w') as f:
