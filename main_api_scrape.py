@@ -57,6 +57,8 @@ def scrape_giveaways():
         roundUrl = tweetsByHashtag + '&next_token=' + nxtToken
         reqJson=get_req(saveFiles["giveawayTweets"], roundUrl, debug=False).json()
         reqData.extend(reqJson["data"])
+        if i % 10:
+            print(i)
 
     # write to file
     with open(saveFiles["giveawayTweets"], 'w') as f:
