@@ -35,7 +35,12 @@ saveFiles = {
 def save_json_to_file(reqData):
     with open(saveFiles["giveawayTweets"], 'w+') as f:
                 json.dump(reqData, f)
-                exit()
+
+    with open("Outputs/raw_data.csv","w+") as f:
+        for entry in reqData:
+            f.write(str(entry["id"]) + ', ' + str(entry["created_at"]) + ', ' + str(entry["public_metrics"]["reply_count"])+'\n')
+    
+    exit()
 
 def scrape_giveaways():
     '''
@@ -43,7 +48,7 @@ def scrape_giveaways():
     '''
     global saveFiles
 
-    tweetsByHashtag = "https://api.twitter.com/2/tweets/search/recent?query="+urllib.parse.quote_plus("(#crypto #giveaway (tag OR comment))")+"&tweet.fields=conversation_id,in_reply_to_user_id,author_id,referenced_tweets,source,text,id,public_metrics&expansions=author_id,entities.mentions.username,in_reply_to_user_id,referenced_tweets.id,referenced_tweets.id.author_id&max_results=100"
+    tweetsByHashtag = "https://api.twitter.com/2/tweets/search/recent?query="+urllib.parse.quote_plus("(#crypto #giveaway)")+"&tweet.fields=conversation_id,in_reply_to_user_id,author_id,referenced_tweets,source,text,id,public_metrics,created_at,geo&max_results=100"
 
     # nasa_tweets = 'https://api.twitter.com/1.1/search/tweets.json?q=crypto%20giveaway&result_type=popular&since_id=1417454251299819520&count=15'
     # nasa_tweets2 = "https://api.twitter.com/1.1/search/tweets.json?max_id=1446475489359585283&q=nasa&include_entities=1&result_type=popular"
@@ -76,12 +81,13 @@ def scrape_giveaways():
         with open("Outputs/interm_"+str(i)+".json", 'w+') as f:
             json.dump(reqJson, f)
 
-        if i % 5 == 0:
+        if i % 100 == 0:
             print("at: " + str(i))
         #time.sleep(5)
 
     # write to file
     save_json_to_file(reqData)
+   
 
 def main():
     #load_bearer_token() #load env vals
