@@ -48,17 +48,20 @@ def scrape_giveaways():
     '''
     global saveFiles
 
-    tweetsByHashtag = "https://api.twitter.com/2/tweets/search/recent?query="+urllib.parse.quote_plus("(#crypto #giveaway)")+"&tweet.fields=conversation_id,in_reply_to_user_id,author_id,referenced_tweets,source,text,id,public_metrics,created_at,geo&max_results=100"
+    tweetsByHashtag = "https://api.twitter.com/2/tweets/search/recent?query="+urllib.parse.quote_plus("((#crypto OR #cryptocurrency OR #nft) (#giveaway OR #giveaways)) OR (#cryptogiveaway OR #cryptogiveaways OR #nftgiveaway OR #nftgiveaways) OR ((crypto OR cryptocurrency OR nft) (giveaway OR giveaways))")+"&tweet.fields=conversation_id,in_reply_to_user_id,author_id,source,text,id,public_metrics,created_at,geo,referenced_tweets&max_results=100"
 
     # nasa_tweets = 'https://api.twitter.com/1.1/search/tweets.json?q=crypto%20giveaway&result_type=popular&since_id=1417454251299819520&count=15'
     # nasa_tweets2 = "https://api.twitter.com/1.1/search/tweets.json?max_id=1446475489359585283&q=nasa&include_entities=1&result_type=popular"
 
     #get first json
+    
+    #tweetsByHashtag = tweetsByHashtag + '&next_token=' + "PUT THE TOKEN HERE"
+    
     reqJson = get_req(saveFiles["giveawayTweets"], tweetsByHashtag, debug=False).json()
+    #print(reqJson)
     reqData = reqJson["data"]
-
     #loop to get the rest
-    MaxCnt = 150
+    MaxCnt = 160
     i = 1
     while i < MaxCnt:
         i += 1  
@@ -72,7 +75,7 @@ def scrape_giveaways():
             print(e)
             save_json_to_file(reqData)
 
-        #print (nxtToken)
+        print (nxtToken)
 
         roundUrl = tweetsByHashtag + '&next_token=' + str(nxtToken)
         reqJson=get_req(saveFiles["giveawayTweets"], roundUrl, debug=False).json()
