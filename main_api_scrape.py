@@ -56,10 +56,11 @@ def scrape_giveaways():
     #get first json
     
     # CHANGE LINE BELOW MBE
-    #tweetsByHashtag = tweetsByHashtag + '&next_token=' + "PUT THE TOKEN HERE"
+    th = tweetsByHashtag + '&next_token=' + "b26v89c19zqg8o3fpds9dvc03x0m8ss5arb15xy3fbx4t"
     
-    reqJson = get_req(saveFiles["giveawayTweets"], tweetsByHashtag, debug=False).json()
+    reqJson = get_req(saveFiles["giveawayTweets"], th, debug=False).json()
     #print(reqJson)
+    
     reqData = reqJson["data"]
     #loop to get the rest
     apiLimit = 170
@@ -79,7 +80,7 @@ def scrape_giveaways():
                 save_json_to_file(reqData)
                 exit()
 
-            print (nxtToken)
+            print ("token: ", nxtToken, " i : ", i)
 
             roundUrl = tweetsByHashtag + '&next_token=' + str(nxtToken)
             reqJson=get_req(saveFiles["giveawayTweets"], roundUrl, debug=False).json()
@@ -87,17 +88,19 @@ def scrape_giveaways():
 
             # with open("Outputs/interm_"+str(i)+".json", 'w+') as f:
             #     json.dump(reqJson, f)
+            time.sleep(7)
 
         # write to file
         save_json_to_file(reqData)
 
         with open("Outputs/interm_"+str(i)+".json", 'w+') as f:
-            json.dump(reqData, f)
+            json.dump(reqJson, f)
+
+        
 
         if(i+1 >= MaxCnt):
             break
-        print("Resting :) at : ", i)
-        time.sleep(15*60)
+        
 
     exit()
    
