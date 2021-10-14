@@ -1,6 +1,7 @@
 import json
 import csv
 
+#opens json file to read
 def readKeyValues(inputJsonFile):
     with open(inputJsonFile, 'r') as infile:
         return json.load(infile)
@@ -43,43 +44,10 @@ def edges(dict, EdgeOutput):
                     writer = csv.writer(f)
                     writer.writerow(fields)
 
-    '''
-    for retweets in retweet_list:
-        for author in retweets:
-            if author in retweets:
-                #weight += 1
-                all_occurrences = (retweet_list.index(retweets),retweets.index('1344433078337290000'))
-                print(all_occurrences)
-                #list_of_occurs.append(all_occurrences)
-                #print(list_of_occurs)
-                #all_occurrences = []
-                #print(list_of_occurs)
-                #print(all_occurrences)
-    '''
 def intersection(lst1, lst2):
     lst3 = [value for value in lst1 if value in lst2]
     return lst3
-                
-    '''
-            while element_found:
-                try:
-                    last_index_found = retweets.index(author, last_index_found + 1)
-                    all_occurrences.append(last_index_found)
-                except ValueError:
-                    element_found = False
-    
-                if len(all_occurrences) == 0:
-                    print("The element wasn't found in the list")
-                else:
-                    print("The element was found at: " + str(all_occurrences))
-    '''
-    
-
-                        
-
-            
-
-
+                     
 
 
 #default values
