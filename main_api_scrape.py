@@ -36,11 +36,11 @@ def save_json_to_file(reqData):
     with open(saveFiles["giveawayTweets"], 'w+') as f:
                 json.dump(reqData, f)
 
-    with open("Outputs/raw_data.csv","w+") as f:
-        for entry in reqData:
-            f.write(str(entry["id"]) + ', ' + str(entry["created_at"]) + ', ' + str(entry["public_metrics"]["reply_count"])+'\n')
+    # with open("Outputs/raw_data.csv","w+") as f:
+    #     for entry in reqData:
+    #         f.write(str(entry["id"]) + ', ' + str(entry["created_at"]) + ', ' + str(entry["public_metrics"]["reply_count"])+'\n')
     
-    exit()
+    # exit()
 
 def scrape_giveaways():
     '''
@@ -55,41 +55,51 @@ def scrape_giveaways():
 
     #get first json
     
+    # CHANGE LINE BELOW MBE
     #tweetsByHashtag = tweetsByHashtag + '&next_token=' + "PUT THE TOKEN HERE"
     
     reqJson = get_req(saveFiles["giveawayTweets"], tweetsByHashtag, debug=False).json()
     #print(reqJson)
     reqData = reqJson["data"]
     #loop to get the rest
-    MaxCnt = 160
+    apiLimit = 170
+    MaxCnt = 4000
     i = 1
     while i < MaxCnt:
-        i += 1  
-        
-        try:
-            nxtToken = reqJson["meta"]["next_token"]
-        
-        except Exception as e:
+        while i % apiLimit != 0:
+            i += 1  
+            
+            try:
+                nxtToken = reqJson["meta"]["next_token"]
+            
+            except Exception as e:
+                print (nxtToken)
+                print("issue at: ",i,"Error:\n")
+                print(e)
+                save_json_to_file(reqData)
+                exit()
+
             print (nxtToken)
-            print("issue at: ",i,"Error:\n")
-            print(e)
-            save_json_to_file(reqData)
 
-        print (nxtToken)
+            roundUrl = tweetsByHashtag + '&next_token=' + str(nxtToken)
+            reqJson=get_req(saveFiles["giveawayTweets"], roundUrl, debug=False).json()
+            reqData.extend(reqJson["data"])
 
-        roundUrl = tweetsByHashtag + '&next_token=' + str(nxtToken)
-        reqJson=get_req(saveFiles["giveawayTweets"], roundUrl, debug=False).json()
-        reqData.extend(reqJson["data"])
+            # with open("Outputs/interm_"+str(i)+".json", 'w+') as f:
+            #     json.dump(reqJson, f)
+
+        # write to file
+        save_json_to_file(reqData)
 
         with open("Outputs/interm_"+str(i)+".json", 'w+') as f:
-            json.dump(reqJson, f)
+            json.dump(reqData, f)
 
-        if i % 100 == 0:
-            print("at: " + str(i))
-        #time.sleep(5)
+        if(i+1 >= MaxCnt):
+            break
+        print("we got here :)")
+        time.sleep(15*60)
 
-    # write to file
-    save_json_to_file(reqData)
+    exit()
    
 
 def main():
