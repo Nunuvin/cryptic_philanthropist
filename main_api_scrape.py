@@ -96,7 +96,7 @@ def scrape_giveaways():
 
         if(i+1 >= MaxCnt):
             break
-        print("we got here :)")
+        print("Resting :) at : ", i)
         time.sleep(15*60)
 
     exit()
