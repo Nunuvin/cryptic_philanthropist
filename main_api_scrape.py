@@ -36,11 +36,11 @@ def save_json_to_file(reqData):
     with open(saveFiles["giveawayTweets"], 'w+') as f:
                 json.dump(reqData, f)
 
-    with open("Outputs/raw_data.csv","w+") as f:
-        for entry in reqData:
-            f.write(str(entry["id"]) + ', ' + str(entry["created_at"]) + ', ' + str(entry["public_metrics"]["reply_count"])+'\n')
+    # with open("Outputs/raw_data.csv","w+") as f:
+    #     for entry in reqData:
+    #         f.write(str(entry["id"]) + ', ' + str(entry["created_at"]) + ', ' + str(entry["public_metrics"]["reply_count"])+'\n')
     
-    exit()
+    # exit()
 
 def scrape_giveaways():
     '''
@@ -48,45 +48,61 @@ def scrape_giveaways():
     '''
     global saveFiles
 
-    tweetsByHashtag = "https://api.twitter.com/2/tweets/search/recent?query="+urllib.parse.quote_plus("(#crypto #giveaway)")+"&tweet.fields=conversation_id,in_reply_to_user_id,author_id,referenced_tweets,source,text,id,public_metrics,created_at,geo&max_results=100"
+    tweetsByHashtag = "https://api.twitter.com/2/tweets/search/recent?query="+urllib.parse.quote_plus("((#crypto OR #cryptocurrency OR #nft) (#giveaway OR #giveaways)) OR (#cryptogiveaway OR #cryptogiveaways OR #nftgiveaway OR #nftgiveaways) OR ((crypto OR cryptocurrency OR nft) (giveaway OR giveaways))")+"&tweet.fields=conversation_id,in_reply_to_user_id,author_id,source,text,id,public_metrics,created_at,geo,referenced_tweets&max_results=100"
 
     # nasa_tweets = 'https://api.twitter.com/1.1/search/tweets.json?q=crypto%20giveaway&result_type=popular&since_id=1417454251299819520&count=15'
     # nasa_tweets2 = "https://api.twitter.com/1.1/search/tweets.json?max_id=1446475489359585283&q=nasa&include_entities=1&result_type=popular"
 
     #get first json
-    reqJson = get_req(saveFiles["giveawayTweets"], tweetsByHashtag, debug=False).json()
+    
+    # CHANGE LINE BELOW MBE
+    th = tweetsByHashtag + '&next_token=' + "b26v89c19zqg8o3fpds9dvc03x0m8ss5arb15xy3fbx4t"
+    
+    reqJson = get_req(saveFiles["giveawayTweets"], th, debug=False).json()
+    #print(reqJson)
+    
     reqData = reqJson["data"]
-
     #loop to get the rest
-    MaxCnt = 150
+    apiLimit = 170
+    MaxCnt = 4000
     i = 1
     while i < MaxCnt:
-        i += 1  
-        
-        try:
-            nxtToken = reqJson["meta"]["next_token"]
-        
-        except Exception as e:
-            print (nxtToken)
-            print("issue at: ",i,"Error:\n")
-            print(e)
-            save_json_to_file(reqData)
+        while i % apiLimit != 0:
+            i += 1  
+            
+            try:
+                nxtToken = reqJson["meta"]["next_token"]
+            
+            except Exception as e:
+                print (nxtToken)
+                print("issue at: ",i,"Error:\n")
+                print(e)
+                save_json_to_file(reqData)
+                exit()
 
-        #print (nxtToken)
+            print ("token: ", nxtToken, " i : ", i)
 
-        roundUrl = tweetsByHashtag + '&next_token=' + str(nxtToken)
-        reqJson=get_req(saveFiles["giveawayTweets"], roundUrl, debug=False).json()
-        reqData.extend(reqJson["data"])
+            roundUrl = tweetsByHashtag + '&next_token=' + str(nxtToken)
+            reqJson=get_req(saveFiles["giveawayTweets"], roundUrl, debug=False).json()
+            reqData.extend(reqJson["data"])
+
+            # with open("Outputs/interm_"+str(i)+".json", 'w+') as f:
+            #     json.dump(reqJson, f)
+            time.sleep(7)
+
+        # write to file
+        save_json_to_file(reqData)
 
         with open("Outputs/interm_"+str(i)+".json", 'w+') as f:
             json.dump(reqJson, f)
 
-        if i % 100 == 0:
-            print("at: " + str(i))
-        #time.sleep(5)
+        
 
-    # write to file
-    save_json_to_file(reqData)
+        if(i+1 >= MaxCnt):
+            break
+        
+
+    exit()
    
 
 def main():
