@@ -3,6 +3,7 @@ import json
 from dotenv import load_dotenv
 import os
 import time
+import datetime
 import urllib
 
 load_dotenv()
@@ -56,18 +57,20 @@ def scrape_giveaways():
     #get first json
     
     # CHANGE LINE BELOW MBE
-    th = tweetsByHashtag + '&next_token=' + "b26v89c19zqg8o3fpds9dvc03x0m8ss5arb15xy3fbx4t"
+    th = tweetsByHashtag + '&next_token=' + "b26v89c19zqg8o3fpds9dvbpei8vgfonrifhb1lx0yet9"
     
     reqJson = get_req(saveFiles["giveawayTweets"], th, debug=False).json()
     #print(reqJson)
     
     reqData = reqJson["data"]
     #loop to get the rest
-    apiLimit = 170
-    MaxCnt = 4000
-    i = 1
+    apiLimit = 100
+    MaxCnt = 3600
+    i = 112
+    nxt = False
     while i < MaxCnt:
-        while i % apiLimit != 0:
+        while (i % apiLimit != 0 and i < MaxCnt) or (nxt == True):
+            nxt = False
             i += 1  
             
             try:
@@ -80,26 +83,29 @@ def scrape_giveaways():
                 save_json_to_file(reqData)
                 exit()
 
-            print ("token: ", nxtToken, " i : ", i)
+            print ("token: ", nxtToken, " i : ", i, " \% done: ", i/MaxCnt, " Time: ", datetime.datetime.fromtimestamp(time.time()))
 
             roundUrl = tweetsByHashtag + '&next_token=' + str(nxtToken)
             reqJson=get_req(saveFiles["giveawayTweets"], roundUrl, debug=False).json()
-            reqData.extend(reqJson["data"])
+            reqData=reqJson["data"]
 
             # with open("Outputs/interm_"+str(i)+".json", 'w+') as f:
             #     json.dump(reqJson, f)
-            time.sleep(7)
+            
 
         # write to file
-        save_json_to_file(reqData)
+        #save_json_to_file(reqData)
 
-        with open("Outputs/interm_"+str(i)+".json", 'w+') as f:
-            json.dump(reqJson, f)
+            with open("Outputs/interm_%04d"%(i)+".json", 'w+') as f:
+                json.dump(reqData, f)
+            reqData = None
 
+            time.sleep(7)
         
 
         if(i+1 >= MaxCnt):
-            break
+            exit()
+        nxt = True
         
 
     exit()
