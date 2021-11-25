@@ -130,3 +130,6 @@ dmypy.json
 
 #tokens
 .bear
+
+#Giveaway file
+/Outputs/final_giveaways.json

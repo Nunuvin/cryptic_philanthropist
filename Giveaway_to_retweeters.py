@@ -28,7 +28,7 @@ def readFromGiveawayFile():
     # Here we delete posts that have less than 100 RTs
     posts_to_delete = []
     for post_entry in final_obj:
-        if(len(final_obj[post_entry]) < 5):
+        if(len(final_obj[post_entry]) < 1):
             posts_to_delete.append(post_entry)
 
     for post_delete in posts_to_delete:
