@@ -33,20 +33,22 @@ def findCommonHashtags():
 
 def countHashtags():
     with open('./Outputs/Community_Hashtags.json', 'w') as outfile:
-        hashtagCount = {}
-        for Community, hashtags in out.items():
-            #print(Community)
-            if Community == '1':
+        output = {}
+        for Communities, hashtags in out.items():
+            hashtagCount = {}
+            #print(Communities)
+            #if Communities == '1':
                 #print(Community)
-                for hashtag in hashtags:
-                    if hashtag in hashtagCount:
-                        count = hashtagCount[hashtag] + 1
-                        #print(count)
-                        hashtagCount.update({hashtag: count})
-                        #print(hashtagCount)
-                    else:
-                        hashtagCount[hashtag] = 1
-        json_object = json.dumps(hashtagCount)
+            for hashtag in hashtags:
+                if hashtag in hashtagCount:
+                    count = hashtagCount[hashtag] + 1
+                    #print(count)
+                    hashtagCount.update({hashtag: count})
+                    #print(hashtagCount)
+                else:
+                    hashtagCount[hashtag] = 1
+            output[Communities] = hashtagCount
+        json_object = json.dumps(output)
         outfile.write(json_object)
     #print(hashtagCount)
     
