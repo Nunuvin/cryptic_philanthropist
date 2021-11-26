@@ -10,7 +10,7 @@ with open(GIVEAWAY_FILE_IN, 'r') as infile:
 
     for entry in giveaway_dict:
         try:
-            out_giveaway_dict[entry['referenced_id'][0]['id']] = entry
+            out_giveaway_dict[entry['referenced_tweets'][0]['id']] = entry
         except KeyError:
             out_giveaway_dict[entry['id']] = entry
 
