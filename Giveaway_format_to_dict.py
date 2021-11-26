@@ -9,7 +9,10 @@ with open(GIVEAWAY_FILE_IN, 'r') as infile:
     giveaway_dict = json.load(infile)
 
     for entry in giveaway_dict:
-        out_giveaway_dict[entry['id']] = entry
+        try:
+            out_giveaway_dict[entry['referenced_id'][0]['id']] = entry
+        except KeyError:
+            out_giveaway_dict[entry['id']] = entry
 
 
 with open(GIVEAWAY_FILE_OUT, 'w') as outfile:
