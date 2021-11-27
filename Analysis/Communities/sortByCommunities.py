@@ -2,8 +2,8 @@ import pandas as pd
 import json
 import re
 
-NODE_LIST_FILE = "./Gephi/Gephi_Nodes_List.csv"
-IN_FILE_NAME = "./Outputs/Giveaway_tweets_info.json"
+NODE_LIST_FILE = "../../Gephi/Gephi_Nodes_List.csv"
+IN_FILE_NAME = "../../Outputs/Giveaway_tweets_info.json"
 
 df = pd.read_csv(NODE_LIST_FILE, dtype=str)
 
@@ -32,25 +32,39 @@ def findCommonHashtags():
         
 
 def countHashtags():
-    with open('./Outputs/Community_Hashtags.json', 'w') as outfile:
+    with open('./Community_Hashtags.json', 'w') as outfile:
         output = {}
+        res = {}
         for Communities, hashtags in out.items():
             hashtagCount = {}
+            highest = {}
+            max = 0
+            tag = " "
             #print(Communities)
             #if Communities == '1':
                 #print(Community)
             for hashtag in hashtags:
                 if hashtag in hashtagCount:
                     count = hashtagCount[hashtag] + 1
-                    #print(count)
+                    if count > max:
+                        max = count
+                        tag = hashtag
+                    #print(max)
+                    #print(tag)
                     hashtagCount.update({hashtag: count})
                     #print(hashtagCount)
                 else:
                     hashtagCount[hashtag] = 1
+                    count = 1
+                    if count > max:
+                        max = count
+                        tag = hashtag
+            highest[tag] = max
             output[Communities] = hashtagCount
+            res[Communities] = highest
         json_object = json.dumps(output)
         outfile.write(json_object)
-    #print(hashtagCount)
-    
+    print(res)
+
 findCommonHashtags()
 countHashtags()
