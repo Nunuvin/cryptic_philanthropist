@@ -14,18 +14,19 @@ def readFromGiveawayFile():
         data_in = json.load(infile)
         for obj in data_in:
             try:
-                parent = obj['referenced_tweets'][0]['id']
-                # print(parent)
+                if obj['referenced_tweets'][0]['type'] == 'retweeted':
+                    parent = obj['referenced_tweets'][0]['id']
+                    # print(parent)
 
-                if(not(parent in final_obj)):
-                    final_obj[parent] = [obj["author_id"]]
-                else:
-                    if(not(obj["author_id"] in final_obj[parent])):
-                        final_obj[parent].append(obj["author_id"])
+                    if(not(parent in final_obj)):
+                        final_obj[parent] = [obj["author_id"]]
+                    else:
+                        if(not(obj["author_id"] in final_obj[parent])):
+                            final_obj[parent].append(obj["author_id"])
             except KeyError:
                 print('got a source! = ' + obj['id'])
 
-    # Here we delete posts that have less than 100 RTs
+    # Here we delete posts that have less than 1 RTs
     posts_to_delete = []
     for post_entry in final_obj:
         if(len(final_obj[post_entry]) < 1):

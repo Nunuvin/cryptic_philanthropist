@@ -133,3 +133,4 @@ dmypy.json
 
 #Giveaway file
 /Outputs/final_giveaways.json
+/Outputs/final_giveaways_dict.json
