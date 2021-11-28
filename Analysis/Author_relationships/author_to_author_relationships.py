@@ -14,8 +14,8 @@ GIVEAWAYTWEETS = "../../Outputs/Giveaway_tweets_info.json"
 GEPHY_NODES_LIST_COMM = "../../Gephi/Gephi_Nodes_List.csv"
 ALL_POSTS = "../../Outputs/final_giveaways.json"
 
-GEPHY_AUTHOR_EDGE_LIST = "../../Gephi/Gephi_Author_Edge_List.csv"
-GEPHY_AUTHOR_NODES_LIST = "../../Gephi/Gephi_Author_Nodes_List.csv"
+GEPHY_AUTHOR_EDGE_LIST = "../../Gephi/Authors/Gephi_Author_Edge_List.csv"
+GEPHY_AUTHOR_NODES_LIST = "../../Gephi/Authors/Gephi_Author_Nodes_List.csv"
 
 def read_gephy_comm_csv(filename):
     postToComm = {}
