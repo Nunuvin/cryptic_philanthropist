@@ -14,6 +14,9 @@ GIVEAWAYTWEETS = "../../Outputs/Giveaway_tweets_info.json"
 GEPHY_NODES_LIST_COMM = "../../Gephi/Gephi_Nodes_List.csv"
 ALL_POSTS = "../../Outputs/final_giveaways.json"
 
+GEPHY_AUTHOR_EDGE_LIST = "../../Gephi/Gephi_Author_Edge_List.csv"
+GEPHY_AUTHOR_NODES_LIST = "../../Gephi/Gephi_Author_Nodes_List.csv"
+
 def read_gephy_comm_csv(filename):
     postToComm = {}
     with open(filename, newline='') as csvf:
@@ -59,7 +62,6 @@ def who_reposted_who(posts, postsToAuthor):
                 except Exception as e:
                     pass #1k nodes have no author info due to it being deleted from twitter
                 
-
                 if authorId in reposterToPoster:
                     reposterToPoster[authorId].append(refTweetAuthor)
                 else:
@@ -87,8 +89,43 @@ def print_x_to_y(authorPosts):
     for author in authorPosts:
         print(author," : ",authorPosts[author])
 
-def export_to_gephi_format(reposterToPoster, posterToReposter, authorToComm):
-    pass
+def export_gephi_author_node_list(reposterToPoster, posterToReposter):
+    global GEPHY_AUTHOR_NODES_LIST
+    authorToId = {}
+    with open(GEPHY_AUTHOR_NODES_LIST, 'w', newline='') as csvf:
+        nodeWriter = csv.writer(csvf, delimiter=',')
+        nodeWriter.writerow(["Id", "Label", "timeset", "size"]) #header
+
+        authors = posterToReposter.keys()
+        for i, author in enumerate(authors):
+            #print(i, author)
+            authorToId[author] = i
+            nodeWriter.writerow([i,author,"",len(posterToReposter[author])])
+    return authorToId
+
+def export_gephi_author_edge_list(reposterToPoster, posterToReposter, authorToId):
+    global GEPHY_AUTHOR_EDGE_LIST
+    authors = posterToReposter.keys()
+    with open(GEPHY_AUTHOR_EDGE_LIST, 'w', newline='') as csvf:
+        edgeWriter = csv.writer(csvf, delimiter=',')
+        edgeWriter.writerow(["Source", "Target", "Type", "Id", "Label", "timeset", "Weight"]) # header
+        #note this is a directed graph
+        i=0
+        for author in authors:
+            srcId = authorToId[author]
+            if author in reposterToPoster:
+                posters = reposterToPoster[author] #list
+                for poster in posters:
+                    if poster in authorToId:
+                        targetId = authorToId[poster]
+                        weight = posters.count(poster)
+                        edgeWriter.writerow([srcId, targetId, "directed", i, "", "", weight])
+                        i += 1
+    
+
+def export_to_gephi_format(reposterToPoster, posterToReposter): 
+    authorToId = export_gephi_author_node_list(reposterToPoster, posterToReposter)
+    export_gephi_author_edge_list(reposterToPoster, posterToReposter, authorToId)
 
 def main():
     global GIVEAWAYTWEETS
@@ -106,12 +143,12 @@ def main():
     
     authorToComms = author_to_comm(authorToPosts, postToComm)
     #!!!!!
-    reposterToPoster, posterToReposter = who_reposted_who(all_posts, postsToAuthor, authorToComms) # just author data of who reposted who
+    reposterToPoster, posterToReposter = who_reposted_who(all_posts, postsToAuthor) # just author data of who reposted who
     #!!!!!
 
+    export_to_gephi_format(reposterToPoster, posterToReposter)
 
-
-    print_x_to_y(authorToComms)
+    #print_x_to_y(reposterToPoster)
 
 
 if __name__ == "__main__":
