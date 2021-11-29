@@ -1,8 +1,8 @@
 import pandas as pd
 import json
 
-NODE_LIST_FILE = "./Gephi/Gephi_Nodes_List.csv"
-EDGE_LIST_FILE = "./Gephi/Gephi_Edge_List.csv"
+NODE_LIST_FILE = "../../Gephi/Gephi_Nodes_List.csv"
+EDGE_LIST_FILE = "../../Gephi/Gephi_Edge_List.csv"
 
 df = pd.read_csv(NODE_LIST_FILE)
 df_edge = pd.read_csv(EDGE_LIST_FILE)
@@ -28,5 +28,5 @@ for index, row in df_edge.iterrows():
                 str(df['modularity_class'][row['Target']])]}
 
 
-with open('./Gephi/Node_to_community.json', 'w') as fp:
+with open('./Node_to_community.json', 'w') as fp:
     json.dump(cross_community_list, fp)
