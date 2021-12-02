@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+from multiprocessing import Pool
 from networkx.algorithms.centrality.betweenness import betweenness_centrality
 from networkx.algorithms.centrality.closeness import closeness_centrality
 from networkx.algorithms.centrality.degree_alg import degree_centrality
@@ -10,6 +11,7 @@ import numpy as np
 import random
 import pandas as pd
 import json
+import itertools
 from collections import defaultdict
 
 df_edge = pd.read_csv('../../Gephi/Gephi_Edge_List.csv', dtype=str)
@@ -36,7 +38,7 @@ G.add_nodes_from(data)
 #degrees = degree_centrality(G)
 #closeness = closeness_centrality(G)
 #eigen = eigenvector_centrality(G)
-betweeness = betweenness_centrality(G, k=1000)
+#betweeness = betweenness_centrality(G, k=1000)
 
 community_degree ={}
 community_closeness = {}
@@ -99,7 +101,43 @@ def betweeness_centrality():
     with open('./betweeness_unweighted.json', 'w+') as b:
         json.dump(community_betweeness, b)
 
+#does not work
+def chunks(l, n):
+    """Divide a list of nodes `l` in `n` chunks"""
+    l_c = iter(l)
+    while 1:
+        x = tuple(itertools.islice(l_c, n))
+        if not x:
+            return
+        yield x
+
+#does not work :(
+def betweenness_centrality_parallel(G, processes=None):
+    """Parallel betweenness centrality  function"""
+    p = Pool(processes=processes)
+    node_divisor = len(p._pool) * 4
+    node_chunks = list(chunks(G.nodes(), int(G.order() / node_divisor)))
+    num_chunks = len(node_chunks)
+    bt_sc = p.starmap(
+        nx.betweenness_centrality_subset,
+        zip(
+            [G] * num_chunks,
+            node_chunks,
+            [list(G)] * num_chunks,
+            [True] * num_chunks,
+            [None] * num_chunks,
+        ),
+    )
+
+    # Reduce the partial solutions
+    bt_c = bt_sc[0]
+    for bt in bt_sc[1:]:
+        for n in bt:
+            bt_c[n] += bt[n]
+    return bt_c
+
 #degree_centrality()
 #closen_centrality()
 #eigen_centrality()
-betweeness_centrality()
+#betweeness_centrality()
+#betweenness_centrality_parallel(G)

@@ -1,6 +1,8 @@
 import pandas as pd
 import json
 import re
+from heapq import nlargest
+from operator import itemgetter
 
 NODE_LIST_FILE = "../../Gephi/Gephi_Nodes_List.csv"
 IN_FILE_NAME = "../../Outputs/Giveaway_tweets_info.json"
@@ -38,6 +40,7 @@ def countHashtags():
         for Communities, authors in out.items():
             authorsCount = {}
             highest = {}
+            topTen = {}
             max = 0
             tag = " "
             #print(Communities)
@@ -46,18 +49,20 @@ def countHashtags():
             for author in authors:
                 if author in authorsCount:
                     count = authorsCount[author] + 1
-                    if count > max:
-                        max = count
-                        tag = author
+                    #if count > high:
+                    #    high = count
+                    #    tag = author
                     #print(count)
                     authorsCount.update({author: count})
                 else:
                     authorsCount[author] = 1
                     count = 1
-                    if count > max:
-                        max = count
-                        tag = author
-            highest[tag] = max
+                    #if count > max:
+                    #    max = count
+                    #    tag = author
+            topTen = dict(sorted(authorsCount.items(), key=lambda x:x[1], reverse=True))
+            for x in list(topTen)[0:10]:
+                highest[x] = topTen[x]
             output[Communities] = authorsCount
             res[Communities] = highest
         json_object = json.dumps(output)
