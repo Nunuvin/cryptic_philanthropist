@@ -2,6 +2,7 @@ import pandas as pd
 import json
 import re
 
+
 NODE_LIST_FILE = "../../Gephi/Gephi_Nodes_List.csv"
 IN_FILE_NAME = "../../Outputs/Giveaway_tweets_info.json"
 
@@ -38,6 +39,7 @@ def countHashtags():
         for Communities, hashtags in out.items():
             hashtagCount = {}
             highest = {}
+            topTen ={}
             max = 0
             tag = " "
             #print(Communities)
@@ -46,9 +48,9 @@ def countHashtags():
             for hashtag in hashtags:
                 if hashtag in hashtagCount:
                     count = hashtagCount[hashtag] + 1
-                    if count > max:
-                        max = count
-                        tag = hashtag
+                    #if count > max:
+                    #    max = count
+                    #    tag = hashtag
                     #print(max)
                     #print(tag)
                     hashtagCount.update({hashtag: count})
@@ -56,10 +58,12 @@ def countHashtags():
                 else:
                     hashtagCount[hashtag] = 1
                     count = 1
-                    if count > max:
-                        max = count
-                        tag = hashtag
-            highest[tag] = max
+                    #if count > max:
+                    #    max = count
+                    #    tag = hashtag
+            topTen = dict(sorted(hashtagCount.items(), key=lambda x:x[1], reverse=True))
+            for x in list(topTen)[0:10]:
+                highest[x] = topTen[x]
             output[Communities] = hashtagCount
             res[Communities] = highest
         json_object = json.dumps(output)
