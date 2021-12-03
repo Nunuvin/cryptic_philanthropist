@@ -1,12 +1,14 @@
 
 import networkx as nx
 import time
+from datetime import datetime
 from multiprocessing import Pool
 
 path_total = 0
 clustering_total = 0
 
 EDGE_LIST = '../../Gephi/nx_edges_list.csv'
+LOG_FILE = 'nullModelLog.log'
 
 G = None
 
@@ -22,25 +24,36 @@ G = [G.subgraph(c).copy()
 
 
 def computeVariables(a):
-    global path_total, clustering_total, G
+    global path_total, clustering_total, G, LOG_FILE
 
     NUM_EDGES = 155416
 
     G1 = nx.Graph(G)
-    start_time = time.time()
-    nx.double_edge_swap(G1, nswap=NUM_EDGES, max_tries=NUM_EDGES*10)
-
-    avg_path = nx.average_shortest_path_length(G1, weight='edge_attr')
-    clustering = nx.average_clustering(G1, weight='edge_attr')
-
+    start_time = datetime.now()
+    print("Process #", a," started: " , start_time)
     
+    succ = False
+    try:
+        while not succ:
+            nx.double_edge_swap(G1, nswap=NUM_EDGES, max_tries=NUM_EDGES*10)
+            avg_path = nx.average_shortest_path_length(G1, weight='edge_attr')
+            clustering = nx.average_clustering(G1, weight='edge_attr')
+            succ = True
+    except Exception as e:
+        print(e)
+
+
+    with open(LOG_FILE,'a') as f: #append is atomic below page size on linux
+        f.writeLines(["avg_path clustering : " + str(avg_path) + " " + str(clustering)])
  #   path_total += avg_path
  #   clustering_total += clustering
-    print("Process died: ", a)
+    print("Process #", a," completed after: " , datetime.now() - start_time)
     return (avg_path, clustering)
-#    print("--- %s seconds ---" % (time.time() - start_time))
+    
 
 if __name__ == '__main__':
+    start = datetime.now()
+    print("Program started: ", start)
     simCount = 100
     sol = [i for i in range(0, simCount)]
     arr = []
@@ -51,3 +64,6 @@ if __name__ == '__main__':
     clustering_total = sum(p[1] for p in arr) / simCount
     print("path_total: ",  path_total)
     print("cluster_total: ", clustering_total)
+    end = datetime.now()
+    print("Program ended: ", end)
+    print("Delta run time: ", end - start)
