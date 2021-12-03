@@ -8,7 +8,7 @@ path_total = 0
 clustering_total = 0
 
 EDGE_LIST = '../../Gephi/nx_edges_list.csv'
-LOG_FILE = 'nullModelLog.log'
+
 
 G = None
 
@@ -39,12 +39,11 @@ def computeVariables(a):
             avg_path = nx.average_shortest_path_length(G1, weight='edge_attr')
             clustering = nx.average_clustering(G1, weight='edge_attr')
             succ = True
+            print("#",a," calc completed")
     except Exception as e:
-        print(e)
+        print("#",a," ",e)
 
-
-    with open(LOG_FILE,'a') as f: #append is atomic below page size on linux
-        f.writeLines(["avg_path clustering : " + str(avg_path) + " " + str(clustering)])
+    print("avg_path clustering : " + str(avg_path) + " " + str(clustering))
  #   path_total += avg_path
  #   clustering_total += clustering
     print("Process #", a," completed after: " , datetime.now() - start_time)
