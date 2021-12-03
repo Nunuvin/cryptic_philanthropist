@@ -1,26 +1,28 @@
-import pandas as pd
+
 import networkx as nx
 import time
-import threading
+from multiprocessing import Pool
 
 path_total = 0
 clustering_total = 0
 
-df_edge = pd.read_csv('../../Gephi/Gephi_Edge_List_FILTERED.csv', dtype=str)
-#df_node = pd.read_csv('../../Gephi/Gephi_Nodes_List.csv', dtype=str)
+EDGE_LIST = '../../Gephi/nx_edges_list.csv'
 
+G = None
 
-G = nx.from_pandas_edgelist(
-    df_edge, source="Source", target="Target", edge_attr='Weight', create_using=nx.Graph())
+with open(EDGE_LIST, 'r') as fhEdge:
+    G = nx.read_weighted_edgelist(fhEdge, delimiter=',')
+# print(G)
+# G = nx.from_pandas_edgelist(
+#     df_edge, source="Source", target="Target", edge_attr='Weight', create_using=nx.Graph())
 
 G = [G.subgraph(c).copy()
      for c in nx.connected_components(G)][0]
 
-mutex = threading.Lock()
 
 
-def computeVariables():
-    global path_total, clustering_total, G, mutex
+def computeVariables(a):
+    global path_total, clustering_total, G
 
     NUM_EDGES = 15
 
@@ -32,24 +34,20 @@ def computeVariables():
     avg_path = nx.average_shortest_path_length(G1)
     clustering = nx.average_clustering(G1, weight='edge_attr')
 
-    mutex.acquire()
-    path_total += avg_path
-    clustering_total += clustering
-    mutex.release()
+    
+ #   path_total += avg_path
+ #   clustering_total += clustering
+   
+    return (avg_path, clustering)
+#    print("--- %s seconds ---" % (time.time() - start_time))
 
-    print("--- %s seconds ---" % (time.time() - start_time))
-
-
-threads = []
-# Do 1000 times
-for i in range(0, 1):
-    x = threading.Thread(target=computeVariables, args=())
-    x.start()
-    threads.append(x)
-
-for thread in threads:
-    thread.join()
-
-
-print(path_total/100)
-print(clustering_total/100)
+if __name__ == '__main__':
+    simCount = 100
+    sol = [1 for i in range(0, simCount)]
+    arr = []
+    with Pool(32) as p:
+        arr = p.map(computeVariables, sol)
+    path_total = sum(p[0] for p in arr) / simCount
+    clustering_total = sum(p[1] for p in arr) / simCount
+    print("path_total: ",  path_total)
+    print("cluster_total: ", clustering_total)
