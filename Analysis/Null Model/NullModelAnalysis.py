@@ -1,4 +1,3 @@
-
 import json
 from multiprocessing import Pool
 from SnapAnalysis import SnapAnalysis
@@ -12,16 +11,13 @@ def computeVariables(a):
 
     results = SnapAnalysis(all_nodes, all_edges)
 
-    with open('./DataStats/Null_Model_' + str(a) + ".json", 'w') as f:
+    with open('./DataStats/Null_Model_' + str(a) + ".json", 'w+') as f:
         json.dump(results, f)
-
-    #print("# ",a," is complete")
     
 
-    path_total = sum(p[0] for p in arr) / simCount
-    clustering_total = sum(p[1] for p in arr) / simCount
-    print("path_total: ",  path_total)
-    print("cluster_total: ", clustering_total)
-    end = datetime.now()
-    print("Program ended: ", end)
-    print("Delta run time: ", end - start)
+if __name__ == '__main__':
+    simCount = 100
+    sol = [1 for i in range(0, simCount)]
+    arr = []
+    with Pool(32) as p:
+        arr = p.map(computeVariables, sol)
