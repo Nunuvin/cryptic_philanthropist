@@ -13,5 +13,5 @@ print(all_nodes)
 
 results = SnapAnalysis(all_nodes, all_edges)
 
-with open('./DataStats/Real_Model.json', 'w') as f:
+with open('./DataStats/Real_Model.json', 'w+') as f:
     json.dump(results, f)
