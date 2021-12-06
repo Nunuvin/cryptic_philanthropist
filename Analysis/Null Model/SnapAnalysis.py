@@ -19,13 +19,17 @@ def SnapAnalysis(all_nodes, all_edges):
         avg_eigen = 0
         avg_shortest_path = 0
 
+        
         Nodes, Edges = G.GetBetweennessCentr(1.0)
         for node in Nodes:
             avg_betweeness += Nodes[node]
 
         avg_betweeness /= G.GetNodes()
+        print('Betweeness done')
 
+        
         avg_clustering = G.GetClustCf()
+        print('Clustering done')
 
         #Closeness centrality
         for NI in G.Nodes():
@@ -33,6 +37,7 @@ def SnapAnalysis(all_nodes, all_edges):
         
         avg_closeness /= G.GetNodes()
 
+        print('Closeness done')
 
         NIdEigenH = G.GetEigenVectorCentr()
         for item in NIdEigenH:
@@ -40,8 +45,11 @@ def SnapAnalysis(all_nodes, all_edges):
         
         avg_eigen /= G.GetNodes()
 
+        print('Eigen done')
 
         avg_shortest_path = G.GetBfsEffDiam(G.GetNodes(), all_nodes, False)
+
+        print('Shortest path done')
 
         print("--- %s seconds ---" % (time.time() - start_time))
 

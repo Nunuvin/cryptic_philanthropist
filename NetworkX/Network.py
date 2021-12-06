@@ -4,6 +4,7 @@ import numpy as np
 import random
 import pandas as pd
 from collections import defaultdict
+import powerlaw
 
 df = pd.read_csv('../Outputs/EdgeList.csv')
 
@@ -19,6 +20,14 @@ G = nx.from_pandas_edgelist(
 degrees = [G.degree(node) for node in G]
 kmin = min(degrees)
 kmax = max(degrees)
+
+
+fit = powerlaw.Fit(degrees) 
+
+print("Estimated power law exponent = " + fit.power_law.alpha)
+
+fig2 = fit.plot_pdf(color='b', linewidth=2)
+fit.power_law.plot_pdf(color='g', linestyle='--', ax=fig2)
 
 # Get 10 logarithmically spaced bins between kmin and kmax
 bin_edges = np.logspace(np.log10(kmin), np.log10(kmax), num=100)

@@ -6,6 +6,8 @@ def EdgeSwap():
     df = pd.read_csv("../../Gephi/Gephi_Edge_List.csv")
     #df = pd.read_csv("./test_data.csv")
 
+    print('Startind Edge swap')
+
     all_ids = list(range(0, len(df)))
 
     new_data = []
