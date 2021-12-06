@@ -1,0 +1,16 @@
+'1129': {'#NFTGiveaway': 542, 
+'#nftcollector': 493, '#NFTs': 281, '#nft': 281, '#NFT': 275, '#NFTCommunity': 273, '#NFTshill': 215, '#NFTGiveaways': 160, '#cryptopunks': 158, '#punks': 142} - 829 members
+
+'628': {'#NFTGiveaway': 776, '#NFTCommunity': 472, '#NFT': 471, '#NFTs': 443, '#NFTGiveaways': 317, '#nft': 229, '#nftcollector': 229, '#NFTcollectibles': 205, '#NFTdrops': 179, '#NFTdrop': 177} - 1190 members
+
+'461': {'#NFT': 93, '#NFTGiveaway': 92, '#NFTs': 49, '#NFTCommunity': 37, '#giveaway': 32, '#nftcollector': 29, '#NFTGiveaways': 26, '#Giveaway': 26, '#deploystarship': 25, '#7': 19} - 211 members
+
+'146': {'#NFT': 112, '#NFTGiveaway': 102, '#NFTs': 73, '#NFTCommunity': 52, '#Giveaway': 35, '#giveaway': 33, '#NFTGiveaways': 23, '#nftcollector': 23, '#Airdrop': 22, '#NFTdrop': 20} - 284 members
+
+'102': {'#NFTGiveaway': 372, '#NFT': 348, '#NFTs': 185, '#NFTCommunity': 144, '#CNFT': 124, '#giveaway': 104, '#nftcollector': 88, '#nft': 87, '#NFTGiveaways': 87, '#CNFTGiveaway': 81} - 923 members
+
+{'6': {'#NFT': 305, '#NFTGiveaway': 284, '#NFTs': 151, '#NFTCommunity': 142, '#NFTGiveaways': 84, '#NFTdrop': 72, '#nftcollector': 71, '#Solana': 63, '#giveaway': 47, '#Giveaway': 45} - 805 members
+
+'4': {'#NFTGiveaway': 1629, '#NFT': 1255, '#NFTs': 790, '#NFTCommunity': 707, '#NFTGiveaways': 473, '#nftcollector': 392, '#NFTdrop': 384, '#nft': 243, '#nftart': 211, '#NFTcollectibles': 202} - 3221 members
+
+'1': {'#NFTGiveaway': 692, '#NFT': 467, '#NFTs': 244, '#NFTCommunity': 239, '#Airdrop': 200, '#NFTGiveaways': 196, '#nftcollector': 176, '#Giveaway': 170, '#NFTdrop': 168, '#giveaway': 167} - 1504 members

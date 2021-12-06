@@ -14,6 +14,8 @@ def computeVariables(a):
 
     with open('./DataStats/Null_Model_' + str(a) + ".json", 'w') as f:
         json.dump(results, f)
+
+    print("# ",a," is complete")
     
 
 if __name__ == '__main__':

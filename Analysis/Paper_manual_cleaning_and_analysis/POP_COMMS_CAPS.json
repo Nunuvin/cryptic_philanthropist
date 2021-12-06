@@ -1,0 +1,62 @@
+{
+    "1129": {
+        "#NFTSHILL": 215,
+        "#CRYPTOPUNKS": 158,
+        "#PUNKS": 142
+    },
+
+    "628": {
+        "#NFTCOLLECTIBLES": 205,
+        "#NFTDROPS": 179,
+        "#NFTDROP": 177
+    },
+
+    "461": {
+        "#GIVEAWAY": 32,
+        "#GIVEAWAY": 26,
+        "#DEPLOYSTARSHIP": 25,
+        "#7": 19
+    },
+
+    "146": {
+        "#GIVEAWAY": 35,
+        "#GIVEAWAY": 33,
+        "#AIRDROP": 22,
+        "#NFTDROP": 20
+    },
+
+    "102": {
+        "#CNFT": 124,
+        "#GIVEAWAY": 104,
+        "#CNFTGIVEAWAY": 81
+    },
+
+    "6": {
+        "#NFTDROP": 72,
+        "#SOLANA": 63,
+        "#GIVEAWAY": 47,
+        "#GIVEAWAY": 45
+    },
+
+    "4": {
+        "#NFTDROP": 384,
+        "#NFTART": 211,
+        "#NFTCOLLECTIBLES": 202
+    },
+
+    "1": {
+        "#AIRDROP": 200,
+        "#GIVEAWAY": 170,
+        "#NFTDROP": 168,
+        "#GIVEAWAY": 167
+    },
+
+    "ALL":{
+        "#NFTGIVEAWAY":0,
+        "#NFTGIVEAWAYS":0,
+        "#NFT":0,
+        "#NFTS":0,
+        "#NFTCOLLECTOR":0,
+        "#NFTCOMMUNITY":0,
+    },
+}
