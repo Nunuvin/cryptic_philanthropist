@@ -50,9 +50,7 @@ def countHashtags():
                     count = hashtagCount[hashtag] + 1
                     #if count > max:
                     #    max = count
-                    #    tag = hashtag
-                    #print(max)
-                    #print(tag)
+                    #    tag = hashtag     
                     hashtagCount.update({hashtag: count})
                     #print(hashtagCount)
                 else:

@@ -14,7 +14,7 @@ out = {}
 
 giveaways = json.load(f)
 
-def findCommonHashtags():
+def findCommonAuthors():
     for index, row in df.iterrows():
         #print(row)
         try:
@@ -33,7 +33,7 @@ def findCommonHashtags():
        
         
 
-def countHashtags():
+def countAuthors():
     with open('./Community_authors.json', 'w') as outfile:
         output = {}
         res = {}
@@ -69,5 +69,5 @@ def countHashtags():
         outfile.write(json_object)
     print(res)
     
-findCommonHashtags()
-countHashtags()
+findCommonAuthors()
+countAuthors()
