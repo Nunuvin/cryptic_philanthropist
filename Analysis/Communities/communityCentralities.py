@@ -35,9 +35,9 @@ G.add_nodes_from(data)
     #G.add_node(node_row[0], modularity = str(node_row[4]))
 #print(G.nodes(data="modularity"))
 
-#degrees = degree_centrality(G)
-#closeness = closeness_centrality(G)
-#eigen = eigenvector_centrality(G)
+degrees = degree_centrality(G)
+closeness = closeness_centrality(G)
+eigen = eigenvector_centrality(G)
 #betweeness = betweenness_centrality(G, k=1000)
 
 community_degree ={}
@@ -46,9 +46,13 @@ community_eigen = {}
 community_betweeness ={}
 
 
+avg_degree = 0;
+avg_close = 0;
+avg_eigen = 0;
+
 community = 0
 
-def degree_centrality():
+def degreeCentrality():
     for index, row in df_node.iterrows():
         postID = str(row['Label'])
         community = row['modularity_class']
@@ -58,11 +62,13 @@ def degree_centrality():
             degs = community_degree[community]
             degs.update({postID: degrees.get(row['Id'])})
             community_degree.update({community: degs})
+
+        
     with open('./degrees.json', 'w+') as d:
         json.dump(community_degree, d)
 
 
-def closen_centrality():
+def closenessCentrality():
     for index, row in df_node.iterrows():
         postID = str(row['Label'])
         community = row['modularity_class']
@@ -75,7 +81,7 @@ def closen_centrality():
     with open('./closeness.json', 'w+') as c:
         json.dump(community_closeness, c)
 
-def eigen_centrality():
+def eigenCentrality():
     for index, row in df_node.iterrows():
         postID = str(row['Label'])
         community = row['modularity_class']
@@ -88,7 +94,7 @@ def eigen_centrality():
     with open('./eigen.json', 'w+') as e:
         json.dump(community_eigen, e)
 
-def betweeness_centrality():
+def betweennessCentrality():
     for index, row in df_node.iterrows():
         postID = str(row['Label'])
         community = row['modularity_class']
@@ -101,43 +107,58 @@ def betweeness_centrality():
     with open('./betweeness_unweighted.json', 'w+') as b:
         json.dump(community_betweeness, b)
 
-#does not work
-def chunks(l, n):
-    """Divide a list of nodes `l` in `n` chunks"""
-    l_c = iter(l)
-    while 1:
-        x = tuple(itertools.islice(l_c, n))
-        if not x:
-            return
-        yield x
+def avgDegree():
+    avgDeg_dict = {}
+    for com, node in community_degree.items():
+        avg_degree = 0
+        for val in node.values():
+            #print(val)
+            try:
+                avg_degree += val
+            except TypeError:
+                pass
+        avg_degree = avg_degree/len(com)
+        avgDeg_dict.update({com: avg_degree}) 
+    print(avgDeg_dict)
 
-#does not work :(
-def betweenness_centrality_parallel(G, processes=None):
-    """Parallel betweenness centrality  function"""
-    p = Pool(processes=processes)
-    node_divisor = len(p._pool) * 4
-    node_chunks = list(chunks(G.nodes(), int(G.order() / node_divisor)))
-    num_chunks = len(node_chunks)
-    bt_sc = p.starmap(
-        nx.betweenness_centrality_subset,
-        zip(
-            [G] * num_chunks,
-            node_chunks,
-            [list(G)] * num_chunks,
-            [True] * num_chunks,
-            [None] * num_chunks,
-        ),
-    )
+def avgCloseness():
+    avgClo_dict = {}
+    for com, node in community_closeness.items():
+        avg_close = 0
+        for val in node.values():
+            #print(val)
+            try:
+                avg_close += val
+            except TypeError:
+                pass
+        avg_close = avg_close/len(com)
+        avgClo_dict.update({com: avg_close}) 
+    print(avgClo_dict)
 
-    # Reduce the partial solutions
-    bt_c = bt_sc[0]
-    for bt in bt_sc[1:]:
-        for n in bt:
-            bt_c[n] += bt[n]
-    return bt_c
+def avgEigen():
+    avgEig_dict = {}
+    for com, node in community_eigen.items():
+        avg_eigen = 0
+        for val in node.values():
+            #print(val)
+            try:
+                avg_eigen += val
+            except TypeError:
+                pass
+        avg_eigen = avg_eigen/len(com)
+        avgEig_dict.update({com: avg_eigen}) 
+    print(avgEig_dict)
 
-#degree_centrality()
-#closen_centrality()
-#eigen_centrality()
-#betweeness_centrality()
-#betweenness_centrality_parallel(G)
+
+degreeCentrality()
+closenessCentrality()
+eigenCentrality()
+
+#Warning, Betweenness takes forever to run (over 4 hours and it still was not complete)
+#betweennessCentrality()
+print("----------------------Average Degree for each community----------------------")
+avgDegree()
+print("----------------------Average Closeness for each community----------------------")
+avgCloseness()
+print("----------------------Average Eigen for each community----------------------")
+avgEigen()
