@@ -37,7 +37,7 @@ ax.yaxis.set_ticks_position('left')
 ax.xaxis.set_ticks_position('bottom')
 
 # Show the plot
-plt.show()
+#plt.show()
 
 
 results = SnapAnalysis(G.nodes(), G.edges())

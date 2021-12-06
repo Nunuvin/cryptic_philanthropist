@@ -50,8 +50,8 @@ def computeVariables(a):
     
 
 if __name__ == '__main__':
-    simCount = 1
+    simCount = 100
     sol = [1 for i in range(0, simCount)]
     arr = []
-    with Pool(32) as p:
+    with Pool(24) as p:
         arr = p.map(computeVariables, sol)
