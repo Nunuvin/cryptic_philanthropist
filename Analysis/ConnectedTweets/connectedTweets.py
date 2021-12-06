@@ -53,7 +53,7 @@ def compute_time_diff(nodePair, posts):
         dt1 = dateParser.isoparse(posts[nodePair[0]]['created_at'])
         dt2 = dateParser.isoparse(posts[nodePair[1]]['created_at'])
         # print(dt1-dt2)
-        return dt1 - dt2, 1
+        return abs(dt1 - dt2), 1
     return None, 0
 
 def compute_avg_time_diff(nodePairs, posts):
