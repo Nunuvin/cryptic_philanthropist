@@ -109,7 +109,7 @@ if __name__ == '__main__':
     simCount = 100
     sol = list(range(0, simCount))
 
-    # with Pool(10) as p:
-    #     arr = p.map(computeVariables, sol)
-    for i in range(0,simCount):
-        computeVariables(i)
+    with Pool(20) as p:
+        arr = p.map(computeVariables, sol)
+    # for i in range(0,simCount):
+    #     computeVariables(i)
