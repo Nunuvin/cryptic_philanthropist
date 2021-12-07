@@ -72,25 +72,27 @@ def computeVariables(a):
     #Sort by weight
     #all_edges_sorted = sorted(all_edges, key=lambda x: x[2]['Weight'], reverse=True)
     #Get average for top 100
-    delta_total = 0
+    delta_total = timedelta()
     valid_pairs = 0
     for i in range(0,100):
         try:
             node_one = df_nodes.loc[df_nodes['Id'] == str(all_edges[i][0])].iloc[0]['Label']
             node_two = df_nodes.loc[df_nodes['Id'] == str(all_edges[i][1])].iloc[0]['Label']
-
-            delta_total += abs(dateParser.isoparse(tweets[node_one]['created_at']).total_seconds() - dateParser.isoparse(tweets[node_two]['created_at']).total_seconds())
+            
+            delta_total += abs((dateParser.isoparse(tweets[node_one]['created_at'])) - (dateParser.isoparse(tweets[node_two]['created_at'])))
             valid_pairs += 1
         except IndexError:
             pass
         except Exception as e:
+            print(e)
             print("Key not found for id1 = " + str(all_edges[i][0]) + " id2 = " + str(all_edges[i][1]))
 
     delta_avg = -1
     if valid_pairs > 0:
-        delta_avg = abs(delta_total)/valid_pairs
+        delta_avg = abs(delta_total.total_seconds())/valid_pairs
 
     print('----' + str(a) + ' ---- Delta time calculation complete!')
+    print('----' + str(a) + ' ---- Total avg = ' + str(delta_avg))
     results = {}
     results = SnapAnalysis(all_nodes, all_edges)
     results['Delta_time'] = delta_avg
