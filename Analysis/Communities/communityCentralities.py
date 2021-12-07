@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+from multiprocessing import Pool
 from networkx.algorithms.centrality.betweenness import betweenness_centrality
 from networkx.algorithms.centrality.closeness import closeness_centrality
 from networkx.algorithms.centrality.degree_alg import degree_centrality
@@ -10,6 +11,7 @@ import numpy as np
 import random
 import pandas as pd
 import json
+import itertools
 from collections import defaultdict
 
 df_edge = pd.read_csv('../../Gephi/Gephi_Edge_List.csv', dtype=str)
@@ -33,10 +35,10 @@ G.add_nodes_from(data)
     #G.add_node(node_row[0], modularity = str(node_row[4]))
 #print(G.nodes(data="modularity"))
 
-#degrees = degree_centrality(G)
-#closeness = closeness_centrality(G)
-#eigen = eigenvector_centrality(G)
-betweeness = betweenness_centrality(G, k=1000)
+degrees = degree_centrality(G)
+closeness = closeness_centrality(G)
+eigen = eigenvector_centrality(G)
+#betweeness = betweenness_centrality(G, k=1000)
 
 community_degree ={}
 community_closeness = {}
@@ -44,9 +46,13 @@ community_eigen = {}
 community_betweeness ={}
 
 
+avg_degree = 0;
+avg_close = 0;
+avg_eigen = 0;
+
 community = 0
 
-def degree_centrality():
+def degreeCentrality():
     for index, row in df_node.iterrows():
         postID = str(row['Label'])
         community = row['modularity_class']
@@ -56,11 +62,13 @@ def degree_centrality():
             degs = community_degree[community]
             degs.update({postID: degrees.get(row['Id'])})
             community_degree.update({community: degs})
+
+        
     with open('./degrees.json', 'w+') as d:
         json.dump(community_degree, d)
 
 
-def closen_centrality():
+def closenessCentrality():
     for index, row in df_node.iterrows():
         postID = str(row['Label'])
         community = row['modularity_class']
@@ -73,7 +81,7 @@ def closen_centrality():
     with open('./closeness.json', 'w+') as c:
         json.dump(community_closeness, c)
 
-def eigen_centrality():
+def eigenCentrality():
     for index, row in df_node.iterrows():
         postID = str(row['Label'])
         community = row['modularity_class']
@@ -86,7 +94,7 @@ def eigen_centrality():
     with open('./eigen.json', 'w+') as e:
         json.dump(community_eigen, e)
 
-def betweeness_centrality():
+def betweennessCentrality():
     for index, row in df_node.iterrows():
         postID = str(row['Label'])
         community = row['modularity_class']
@@ -99,7 +107,58 @@ def betweeness_centrality():
     with open('./betweeness_unweighted.json', 'w+') as b:
         json.dump(community_betweeness, b)
 
-#degree_centrality()
-#closen_centrality()
-#eigen_centrality()
-betweeness_centrality()
+def avgDegree():
+    avgDeg_dict = {}
+    for com, node in community_degree.items():
+        avg_degree = 0
+        for val in node.values():
+            #print(val)
+            try:
+                avg_degree += val
+            except TypeError:
+                pass
+        avg_degree = avg_degree/len(com)
+        avgDeg_dict.update({com: avg_degree}) 
+    print(avgDeg_dict)
+
+def avgCloseness():
+    avgClo_dict = {}
+    for com, node in community_closeness.items():
+        avg_close = 0
+        for val in node.values():
+            #print(val)
+            try:
+                avg_close += val
+            except TypeError:
+                pass
+        avg_close = avg_close/len(com)
+        avgClo_dict.update({com: avg_close}) 
+    print(avgClo_dict)
+
+def avgEigen():
+    avgEig_dict = {}
+    for com, node in community_eigen.items():
+        avg_eigen = 0
+        for val in node.values():
+            #print(val)
+            try:
+                avg_eigen += val
+            except TypeError:
+                pass
+        avg_eigen = avg_eigen/len(com)
+        avgEig_dict.update({com: avg_eigen}) 
+    print(avgEig_dict)
+
+
+degreeCentrality()
+closenessCentrality()
+eigenCentrality()
+
+#Warning, Betweenness takes forever to run (over 4 hours and it still was not complete)
+#betweennessCentrality()
+print("----------------------Average Degree for each community----------------------")
+avgDegree()
+print("----------------------Average Closeness for each community----------------------")
+avgCloseness()
+print("----------------------Average Eigen for each community----------------------")
+avgEigen()
