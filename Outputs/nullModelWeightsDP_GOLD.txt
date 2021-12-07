@@ -1,0 +1,405 @@
+Program started:  2021-12-02 21:29:28.017658
+Process # 6  started:  2021-12-02 21:29:31.521477
+Process # 0  started:  2021-12-02 21:29:31.536563
+Process # 2  started:  2021-12-02 21:29:31.543497
+Process # 4  started:  2021-12-02 21:29:31.607555
+Process # 8  started:  2021-12-02 21:29:31.608556
+Process # 10  started:  2021-12-02 21:29:31.632578
+Process # 18  started:  2021-12-02 21:29:31.706645
+Process # 14  started:  2021-12-02 21:29:31.754689
+Process # 22  started:  2021-12-02 21:29:31.766794
+Process # 24  started:  2021-12-02 21:29:31.772705
+Process # 16  started:  2021-12-02 21:29:31.777710
+Process # 26  started:  2021-12-02 21:29:31.785717
+Process # 20  started:  2021-12-02 21:29:31.788719
+Process # 34  started:  2021-12-02 21:29:31.806736
+Process # 12  started:  2021-12-02 21:29:31.807737
+Process # 32  started:  2021-12-02 21:29:31.822751
+Process # 28  started:  2021-12-02 21:29:31.826754
+Process # 36  started:  2021-12-02 21:29:31.826754
+Process # 30  started:  2021-12-02 21:29:31.868793
+Process # 38  started:  2021-12-02 21:29:31.893815
+Process # 42  started:  2021-12-02 21:29:31.948865
+Process # 40  started:  2021-12-02 21:29:31.998911
+Process # 44  started:  2021-12-02 21:29:32.031941
+Process # 46  started:  2021-12-02 21:29:32.197311
+# 10  calc completed
+avg_path clustering : 2.2186321546217607 0.5684482437660333
+Process # 10  completed after:  0:11:53.103783
+Process # 11  started:  2021-12-02 21:41:25.723259
+# 34  calc completed
+avg_path clustering : 2.222409956147505 0.5593994963889141
+Process # 34  completed after:  0:11:54.018615
+# 4  calc completed
+avg_path clustering : 2.217606992401276 0.5659421481448625
+Process # 4  completed after:  0:11:54.641181
+# 40  calc completed
+avg_path clustering : 2.222483449854606 0.5645398944627327
+Process # 40  completed after:  0:11:54.684220
+Process # 35  started:  2021-12-02 21:41:26.703149
+Process # 5  started:  2021-12-02 21:41:27.073486
+Process # 41  started:  2021-12-02 21:41:27.513886
+# 46  calc completed
+avg_path clustering : 2.2257692935042437 0.5607952645002413
+Process # 46  completed after:  0:11:56.165347
+# 16  calc completed
+avg_path clustering : 2.222498073602448 0.5674646515544876
+Process # 16  completed after:  0:11:56.695048
+Process # 47  started:  2021-12-02 21:41:29.362567
+Process # 17  started:  2021-12-02 21:41:29.432630
+# 6  calc completed
+avg_path clustering : 2.2219176233035047 0.5636461365548959
+Process # 6  completed after:  0:12:02.950734
+Process # 7  started:  2021-12-02 21:41:35.410064
+# 26  calc completed
+avg_path clustering : 2.2201995204160645 0.5615310007410912
+Process # 26  completed after:  0:12:07.281671
+# 8  calc completed
+avg_path clustering : 2.221352921656083 0.5609811905128054
+Process # 8  completed after:  0:12:07.491862
+# 0  calc completed
+avg_path clustering : 2.223030528011039 0.565580470381039
+Process # 0  completed after:  0:12:08.790971
+Process # 27  started:  2021-12-02 21:41:40.787952
+Process # 9  started:  2021-12-02 21:41:40.826988
+Process # 1  started:  2021-12-02 21:41:41.908971
+# 38  calc completed
+avg_path clustering : 2.2219907420427125 0.5604368771600663
+Process # 38  completed after:  0:12:10.819888
+# 24  calc completed
+avg_path clustering : 2.222834794770698 0.5611317863529199
+Process # 24  completed after:  0:12:11.314337
+Process # 39  started:  2021-12-02 21:41:43.907788
+Process # 25  started:  2021-12-02 21:41:44.292138
+# 22  calc completed
+avg_path clustering : 2.2218602532158185 0.5619994805230009
+Process # 22  completed after:  0:12:18.466745
+# 36  calc completed
+avg_path clustering : 2.2194533343082496 0.5666945588744229
+Process # 36  completed after:  0:12:18.818159
+Process # 23  started:  2021-12-02 21:41:51.405604
+Process # 37  started:  2021-12-02 21:41:51.736906
+# 32  calc completed
+avg_path clustering : 2.221212308696068 0.5657938684339698
+Process # 32  completed after:  0:12:20.596775
+# 28  calc completed
+avg_path clustering : 2.224677386998738 0.5645171264012702
+Process # 28  completed after:  0:12:21.033172
+# 2  calc completed
+avg_path clustering : 2.220691853260065 0.56679366125876
+Process # 2  completed after:  0:12:21.693772
+Process # 33  started:  2021-12-02 21:41:53.505514
+Process # 29  started:  2021-12-02 21:41:53.905877
+Process # 3  started:  2021-12-02 21:41:54.370300
+# 20  calc completed
+avg_path clustering : 2.2190071225151344 0.5643861010954376
+Process # 20  completed after:  0:12:23.255192
+Process # 21  started:  2021-12-02 21:41:56.203966
+# 44  calc completed
+avg_path clustering : 2.222705805815377 0.5644068409574193
+Process # 44  completed after:  0:12:36.276028
+Process # 45  started:  2021-12-02 21:42:09.350917
+# 30  calc completed
+avg_path clustering : 2.219253101453188 0.5617679926170722
+Process # 30  completed after:  0:12:38.528075
+Process # 31  started:  2021-12-02 21:42:11.435813
+# 42  calc completed
+avg_path clustering : 2.2218433796606165 0.5638438938864424
+Process # 42  completed after:  0:12:43.288403
+Process # 43  started:  2021-12-02 21:42:16.677577
+# 14  calc completed
+avg_path clustering : 2.223141893475371 0.5611983415615018
+Process # 14  completed after:  0:12:47.099868
+Process # 15  started:  2021-12-02 21:42:20.108695
+# 12  calc completed
+avg_path clustering : 2.2185462869741777 0.5603646213369932
+Process # 12  completed after:  0:12:48.615245
+# 18  calc completed
+avg_path clustering : 2.224377412684039 0.5633255039066815
+Process # 18  completed after:  0:12:49.132715
+Process # 13  started:  2021-12-02 21:42:21.658104
+Process # 19  started:  2021-12-02 21:42:21.989405
+# 11  calc completed
+avg_path clustering : 2.2227560515130893 0.566830898229099
+Process # 11  completed after:  0:12:00.298103
+Process # 48  started:  2021-12-02 21:53:26.817086
+# 41  calc completed
+avg_path clustering : 2.2190641176349275 0.5598421277184034
+Process # 41  completed after:  0:12:03.317861
+# 17  calc completed
+avg_path clustering : 2.2224838248224996 0.5592468107331402
+Process # 17  completed after:  0:12:01.891639
+Process # 50  started:  2021-12-02 21:53:31.647488
+# 35  calc completed
+avg_path clustering : 2.219330344839223 0.564371306390117
+Process # 35  completed after:  0:12:05.061446
+Process # 52  started:  2021-12-02 21:53:32.272056
+Process # 54  started:  2021-12-02 21:53:32.832566
+# 5  calc completed
+avg_path clustering : 2.216936924775816 0.5647399075976699
+Process # 5  completed after:  0:12:11.948749
+Process # 56  started:  2021-12-02 21:53:39.901033
+# 47  calc completed
+avg_path clustering : 2.2216078998235775 0.5651248413812738
+Process # 47  completed after:  0:12:14.344431
+Process # 58  started:  2021-12-02 21:53:44.817007
+# 7  calc completed
+avg_path clustering : 2.224925990712045 0.5558730616647589
+Process # 7  completed after:  0:12:23.684671
+Process # 60  started:  2021-12-02 21:53:59.952031
+# 39  calc completed
+avg_path clustering : 2.2180970754379157 0.5662391027226265
+Process # 39  completed after:  0:12:18.457963
+# 27  calc completed
+avg_path clustering : 2.2201736476314218 0.5604022394694057
+Process # 27  completed after:  0:12:21.683895
+Process # 62  started:  2021-12-02 21:54:03.540818
+Process # 64  started:  2021-12-02 21:54:03.605878
+# 9  calc completed
+avg_path clustering : 2.22034238318344 0.5603050563513906
+Process # 9  completed after:  0:12:27.629331
+# 25  calc completed
+avg_path clustering : 2.219413587711552 0.5637634840037485
+Process # 25  completed after:  0:12:24.847972
+Process # 66  started:  2021-12-02 21:54:09.776689
+Process # 68  started:  2021-12-02 21:54:10.482330
+# 1  calc completed
+avg_path clustering : 2.222789048687706 0.5595556150445379
+Process # 1  completed after:  0:12:31.569588
+# 23  calc completed
+avg_path clustering : 2.219360342270693 0.5591001768509948
+Process # 23  completed after:  0:12:22.219088
+Process # 72  started:  2021-12-02 21:54:14.689184
+Process # 70  started:  2021-12-02 21:54:14.869347
+# 33  calc completed
+avg_path clustering : 2.2209682045974812 0.5627850944495029
+Process # 33  completed after:  0:12:25.540158
+Process # 74  started:  2021-12-02 21:54:20.211732
+# 21  calc completed
+avg_path clustering : 2.2238888295189723 0.563701792585339
+Process # 21  completed after:  0:12:24.121870
+Process # 76  started:  2021-12-02 21:54:21.412433
+# 37  calc completed
+avg_path clustering : 2.2189988732214805 0.5613800055621283
+Process # 37  completed after:  0:12:31.304411
+Process # 78  started:  2021-12-02 21:54:24.112866
+# 29  calc completed
+avg_path clustering : 2.2223874580739023 0.565910981448349
+Process # 29  completed after:  0:12:33.536971
+# 3  calc completed
+avg_path clustering : 2.219308221733514 0.5646212260973636
+Process # 3  completed after:  0:12:33.970364
+Process # 80  started:  2021-12-02 21:54:28.577880
+Process # 82  started:  2021-12-02 21:54:29.514238
+# 45  calc completed
+avg_path clustering : 2.2230579006672553 0.5632215019255151
+Process # 45  completed after:  0:12:25.633328
+Process # 84  started:  2021-12-02 21:54:36.079240
+# 31  calc completed
+avg_path clustering : 2.218942628037474 0.5586898235574983
+Process # 31  completed after:  0:12:34.944853
+Process # 86  started:  2021-12-02 21:54:47.383577
+# 43  calc completed
+avg_path clustering : 2.220575238245225 0.5653006356830207
+Process # 43  completed after:  0:12:44.223875
+Process # 88  started:  2021-12-02 21:55:02.066019
+# 13  calc completed
+avg_path clustering : 2.2230972722960596 0.5613127259565326
+Process # 13  completed after:  0:12:42.241581
+Process # 90  started:  2021-12-02 21:55:04.797501
+# 19  calc completed
+avg_path clustering : 2.220866588298377 0.5627787083010527
+Process # 19  completed after:  0:12:43.873653
+# 15  calc completed
+avg_path clustering : 2.2199651654827055 0.5619348426592554
+Process # 15  completed after:  0:12:45.771378
+Process # 94  started:  2021-12-02 21:55:06.888497
+Process # 92  started:  2021-12-02 21:55:06.896504
+# 52  calc completed
+avg_path clustering : 2.2220177397310357 0.5618899976989203
+Process # 52  completed after:  0:12:01.622740
+# 54  calc completed
+avg_path clustering : 2.223583605653766 0.5621776340288377
+Process # 54  completed after:  0:12:01.681793
+Process # 53  started:  2021-12-02 22:05:34.706533
+# 48  calc completed
+avg_path clustering : 2.2250628539931268 0.5620446116749939
+Process # 48  completed after:  0:12:07.926481
+# 50  calc completed
+avg_path clustering : 2.2193918395737366 0.5631980801824856
+Process # 50  completed after:  0:12:03.786707
+Process # 55  started:  2021-12-02 22:05:35.455214
+Process # 49  started:  2021-12-02 22:05:35.585332
+Process # 51  started:  2021-12-02 22:05:36.374049
+# 56  calc completed
+avg_path clustering : 2.2253283312616357 0.5614946052201946
+Process # 56  completed after:  0:12:07.872555
+Process # 57  started:  2021-12-02 22:05:48.642358
+# 58  calc completed
+avg_path clustering : 2.222717429820072 0.5626772955239294
+Process # 58  completed after:  0:12:10.276257
+Process # 59  started:  2021-12-02 22:05:56.005600
+# 64  calc completed
+avg_path clustering : 2.2220076155979145 0.5642411621525045
+Process # 64  completed after:  0:12:16.684957
+# 72  calc completed
+avg_path clustering : 2.2261011400898796 0.5598263749711961
+Process # 72  completed after:  0:12:05.988003
+Process # 65  started:  2021-12-02 22:06:21.176641
+Process # 73  started:  2021-12-02 22:06:21.538970
+# 68  calc completed
+avg_path clustering : 2.2260122726991503 0.5677814648338341
+Process # 68  completed after:  0:12:12.252234
+# 62  calc completed
+avg_path clustering : 2.2222982157152793 0.5680337285802841
+Process # 62  completed after:  0:12:20.009488
+Process # 69  started:  2021-12-02 22:06:23.655401
+Process # 63  started:  2021-12-02 22:06:24.639802
+# 78  calc completed
+avg_path clustering : 2.2254295725928466 0.5575811504029983
+Process # 78  completed after:  0:12:00.798182
+# 60  calc completed
+avg_path clustering : 2.2210304492677815 0.5623586312952379
+Process # 60  completed after:  0:12:25.853363
+Process # 79  started:  2021-12-02 22:06:25.907487
+Process # 61  started:  2021-12-02 22:06:26.824321
+# 76  calc completed
+avg_path clustering : 2.221585401749975 0.564065340472974
+Process # 76  completed after:  0:12:06.298714
+# 74  calc completed
+avg_path clustering : 2.221010201001539 0.5656817022266895
+Process # 74  completed after:  0:12:07.681580
+Process # 77  started:  2021-12-02 22:06:28.705050
+Process # 75  started:  2021-12-02 22:06:28.851183
+# 70  calc completed
+avg_path clustering : 2.220703477264759 0.5571106043492197
+Process # 70  completed after:  0:12:16.099278
+Process # 71  started:  2021-12-02 22:06:32.032593
+# 82  calc completed
+avg_path clustering : 2.2216783937875317 0.5600099529647696
+Process # 82  completed after:  0:12:04.574223
+# 66  calc completed
+avg_path clustering : 2.218091450919515 0.5665598744461944
+Process # 66  completed after:  0:12:24.965367
+Process # 83  started:  2021-12-02 22:06:35.106387
+Process # 67  started:  2021-12-02 22:06:35.909116
+# 80  calc completed
+avg_path clustering : 2.222139604296382 0.5595340931953531
+Process # 80  completed after:  0:12:08.600390
+Process # 81  started:  2021-12-02 22:06:38.223727
+# 84  calc completed
+avg_path clustering : 2.2195811983598905 0.5667074732656728
+Process # 84  completed after:  0:12:12.146182
+Process # 85  started:  2021-12-02 22:06:49.292392
+# 86  calc completed
+avg_path clustering : 2.2235149865292785 0.5587774160646664
+Process # 86  completed after:  0:12:03.316094
+Process # 87  started:  2021-12-02 22:06:51.770645
+# 94  calc completed
+avg_path clustering : 2.2240991865071553 0.5578174132113043
+Process # 94  completed after:  0:12:04.981934
+Process # 95  started:  2021-12-02 22:07:12.734230
+# 88  calc completed
+avg_path clustering : 2.2227725501003976 0.560066408587498
+Process # 88  completed after:  0:12:10.760800
+Process # 89  started:  2021-12-02 22:07:13.653571
+# 92  calc completed
+avg_path clustering : 2.2208722128167775 0.5654380267210612
+Process # 92  completed after:  0:12:07.319578
+Process # 93  started:  2021-12-02 22:07:15.174460
+# 90  calc completed
+avg_path clustering : 2.222817921215496 0.5621798730398463
+Process # 90  completed after:  0:12:15.631263
+Process # 91  started:  2021-12-02 22:07:21.414223
+# 49  calc completed
+avg_path clustering : 2.2211965600445462 0.557789943795661
+Process # 49  completed after:  0:12:13.950847
+Process # 96  started:  2021-12-02 22:17:50.348485
+# 57  calc completed
+avg_path clustering : 2.2199501667669708 0.5657851117728828
+Process # 57  completed after:  0:12:03.026327
+Process # 98  started:  2021-12-02 22:17:52.553489
+# 51  calc completed
+avg_path clustering : 2.2214012925143285 0.5606595208605064
+Process # 51  completed after:  0:12:19.270757
+# 53  calc completed
+avg_path clustering : 2.2214785359003635 0.5610685117909198
+Process # 53  completed after:  0:12:26.453730
+# 55  calc completed
+avg_path clustering : 2.2258420372755583 0.5592312182452982
+Process # 55  completed after:  0:12:25.960424
+# 59  calc completed
+avg_path clustering : 2.220668980218569 0.5605282142037974
+Process # 59  completed after:  0:12:18.885008
+# 73  calc completed
+avg_path clustering : 2.225939903895729 0.5592703578309187
+Process # 73  completed after:  0:12:01.908364
+# 77  calc completed
+avg_path clustering : 2.225697299668716 0.5614307737602328
+Process # 77  completed after:  0:11:56.702398
+# 79  calc completed
+avg_path clustering : 2.2188616349725057 0.5633302008762239
+Process # 79  completed after:  0:11:59.593952
+# 75  calc completed
+avg_path clustering : 2.2214136664548096 0.5628948734870739
+Process # 75  completed after:  0:12:07.022247
+# 81  calc completed
+avg_path clustering : 2.226407113890873 0.565741834961271
+Process # 81  completed after:  0:11:58.612336
+# 83  calc completed
+avg_path clustering : 2.2241835542831647 0.5610928294873804
+Process # 83  completed after:  0:12:01.901046
+# 63  calc completed
+avg_path clustering : 2.2186662767000573 0.5622210939402944
+Process # 63  completed after:  0:12:18.442802
+# 85  calc completed
+avg_path clustering : 2.2229210373861736 0.5596955850304784
+Process # 85  completed after:  0:11:59.334749
+# 69  calc completed
+avg_path clustering : 2.2240845627593138 0.5633116125024292
+Process # 69  completed after:  0:12:26.698049
+# 65  calc completed
+avg_path clustering : 2.220973829115882 0.5631053896798108
+Process # 65  completed after:  0:12:30.267737
+# 87  calc completed
+avg_path clustering : 2.2228685418811014 0.5611284021249122
+Process # 87  completed after:  0:12:00.273624
+# 67  calc completed
+avg_path clustering : 2.2211628129341423 0.5642135190257781
+Process # 67  completed after:  0:12:17.237225
+# 71  calc completed
+avg_path clustering : 2.2237174691917003 0.5633087892432872
+Process # 71  completed after:  0:12:23.822603
+# 89  calc completed
+avg_path clustering : 2.215040712139023 0.5647690672475666
+Process # 89  completed after:  0:11:42.491582
+# 61  calc completed
+avg_path clustering : 2.2171390324703446 0.5646194057557936
+Process # 61  completed after:  0:12:29.788169
+# 95  calc completed
+avg_path clustering : 2.2203630064175757 0.5641871144207522
+Process # 95  completed after:  0:11:44.347269
+# 93  calc completed
+avg_path clustering : 2.2206757296406496 0.5648672186615407
+Process # 93  completed after:  0:11:49.383897
+# 91  calc completed
+avg_path clustering : 2.2170089186113437 0.5673363424391638
+Process # 91  completed after:  0:11:45.153146
+# 96  calc completed
+avg_path clustering : 2.2225981900299785 0.5627820094537773
+Process # 96  completed after:  0:07:54.451728
+Process # 97  started:  2021-12-02 22:25:45.222688
+# 98  calc completed
+avg_path clustering : 2.217272521040386 0.5662749820934032
+Process # 98  completed after:  0:07:57.579733
+Process # 99  started:  2021-12-02 22:25:50.580249
+# 97  calc completed
+avg_path clustering : 2.222099107763898 0.5634074969479043
+Process # 97  completed after:  0:07:25.848417
+# 99  calc completed
+avg_path clustering : 2.2234429926937507 0.5642323978581041
+Process # 99  completed after:  0:07:32.257851
+path_total:  2.2215975694581145
+cluster_total:  0.562775578503636
+Program ended:  2021-12-02 22:33:22.957921
+Delta run time:  1:03:54.940263
