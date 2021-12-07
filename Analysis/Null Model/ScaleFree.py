@@ -3,12 +3,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from SnapAnalysis import SnapAnalysis
 import json
+import snap
 
-G = nx.scale_free_graph(11528)
+G = snap.GenRndPowerLaw(11528, 4.025269688407503)
 
 
 #Degree distribution
-degrees = [G.degree(node) for node in G]
+degrees = [node.GetOutDeg() + node.GetInDeg() for node in G.Nodes()]
 kmin = min(degrees)
 kmax = max(degrees)
 
@@ -39,8 +40,15 @@ ax.xaxis.set_ticks_position('bottom')
 # Show the plot
 plt.show()
 
+edges = []
+for e in G.Edges():
+    edges.append([e.GetSrcNId(), e.GetDstNId()])
 
-results = SnapAnalysis(G.nodes(), G.edges())
+nodes= []
+for n in G.Nodes():
+    nodes.append(n.GetId())
+
+results = SnapAnalysis(nodes, edges)
 
 with open('./DataStats/ScaleFree.json','w+') as f:
     json.dump(results,f)
