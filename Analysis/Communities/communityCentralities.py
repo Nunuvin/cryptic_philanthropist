@@ -17,15 +17,6 @@ from collections import defaultdict
 df_edge = pd.read_csv('../../Gephi/Gephi_Edge_List.csv', dtype=str)
 df_node = pd.read_csv('../../Gephi/Gephi_Nodes_List.csv', dtype=str)
 
-#print(df_node)
-#dfmod_class = df_node[df_node['modularity_class'] == 4]
-#print(dfmod_class)
-
-#G = nx.Graph()
-
-#add edges and edge attributes
-#for i, edge_row in df_edge.iterrows():
-   # G.add_edge(edge_row[0], edge_row[1], weight = edge_row[6])
 G = nx.from_pandas_edgelist(
     df_edge, source="Source", target="Target", edge_attr='Weight', create_using=nx.Graph())
 data = df_node.set_index('Label').to_dict('index').items()
@@ -35,10 +26,11 @@ G.add_nodes_from(data)
     #G.add_node(node_row[0], modularity = str(node_row[4]))
 #print(G.nodes(data="modularity"))
 
+#-------------Note to make the calculation Faster, I only run one at a time!!!!!---------------
 degrees = degree_centrality(G)
 closeness = closeness_centrality(G)
 eigen = eigenvector_centrality(G)
-#betweeness = betweenness_centrality(G, k=1000)
+betweeness = betweenness_centrality(G, k=1000)
 
 community_degree ={}
 community_closeness = {}
@@ -49,6 +41,8 @@ community_betweeness ={}
 avg_degree = 0;
 avg_close = 0;
 avg_eigen = 0;
+avg_bet = 0;
+
 
 community = 0
 
@@ -149,16 +143,31 @@ def avgEigen():
         avgEig_dict.update({com: avg_eigen}) 
     print(avgEig_dict)
 
+def avgBetween():
+    avgBet_dict = {}
+    for com, node in community_betweeness.items():
+        avg_bet = 0
+        for val in node.values():
+            #print(val)
+            try:
+                avg_bet += val
+            except TypeError:
+                pass
+        avg_bet = avg_bet/len(com)
+        avgBet_dict.update({com: avg_bet}) 
+    print(avgBet_dict)
 
 degreeCentrality()
 closenessCentrality()
 eigenCentrality()
 
 #Warning, Betweenness takes forever to run (over 4 hours and it still was not complete)
-#betweennessCentrality()
+betweennessCentrality()
 print("----------------------Average Degree for each community----------------------")
 avgDegree()
 print("----------------------Average Closeness for each community----------------------")
 avgCloseness()
 print("----------------------Average Eigen for each community----------------------")
 avgEigen()
+print("----------------------Average betweenness for each community----------------------")
+avgBetween()
