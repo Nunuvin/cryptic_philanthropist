@@ -62,7 +62,7 @@ def countHashtags():
             topTen = dict(sorted(hashtagCount.items(), key=lambda x:x[1], reverse=True))
             for x in list(topTen)[0:10]:
                 highest[x] = topTen[x]
-            output[Communities] = hashtagCount
+            output[Communities] = topTen
             res[Communities] = highest
         json_object = json.dumps(output)
         outfile.write(json_object)
