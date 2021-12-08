@@ -105,6 +105,8 @@ def betweennessCentrality():
     with open('./betweeness_unweighted.json', 'w+') as b:
         json.dump(community_betweeness, b)
 
+
+
 degreeCentrality()
 #closenessCentrality()
 #eigenCentrality()
