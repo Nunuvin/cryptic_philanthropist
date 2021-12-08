@@ -5,7 +5,7 @@ from SnapAnalysis import SnapAnalysis
 import json
 import snap
 
-G = snap.GenRndPowerLaw(11528, 4.025269688407503)
+G = snap.GenRndPowerLaw(11529, 4.025269688407503, False)
 
 
 #Degree distribution
