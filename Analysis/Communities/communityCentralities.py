@@ -28,26 +28,21 @@ G.add_nodes_from(data)
 
 #-------------Note to make the calculation Faster, I only run one at a time!!!!!---------------
 degrees = degree_centrality(G)
-closeness = closeness_centrality(G)
-eigen = eigenvector_centrality(G)
-betweeness = betweenness_centrality(G, k=1000)
+#closeness = closeness_centrality(G)
+#eigen = eigenvector_centrality(G)
+#betweeness = betweenness_centrality(G, k=1000)
 
 community_degree ={}
-community_closeness = {}
-community_eigen = {}
-community_betweeness ={}
-
-
-avg_degree = 0;
-avg_close = 0;
-avg_eigen = 0;
-avg_bet = 0;
+#community_closeness = {}
+#community_eigen = {}
+#community_betweeness ={}
 
 
 community = 0
 
 def degreeCentrality():
     for index, row in df_node.iterrows():
+        topTenDeg ={}
         postID = str(row['Label'])
         community = row['modularity_class']
         if community not in community_degree:
@@ -55,8 +50,8 @@ def degreeCentrality():
         else:
             degs = community_degree[community]
             degs.update({postID: degrees.get(row['Id'])})
-            community_degree.update({community: degs})
-
+            topTenDeg = dict(sorted(degs.items(), key=lambda x:x[1], reverse=True))
+            community_degree.update({community: topTenDeg})
         
     with open('./degrees.json', 'w+') as d:
         json.dump(community_degree, d)
@@ -64,6 +59,7 @@ def degreeCentrality():
 
 def closenessCentrality():
     for index, row in df_node.iterrows():
+        topTenClose ={}
         postID = str(row['Label'])
         community = row['modularity_class']
         if community not in community_closeness:
@@ -71,12 +67,15 @@ def closenessCentrality():
         else:
             closes = community_closeness[community]
             closes.update({postID: closeness.get(row['Id'])})
+            topTenClose = dict(sorted(community_degree.items(), key=lambda x:x[1], reverse=True))
             community_closeness.update({community: closes})
+        
     with open('./closeness.json', 'w+') as c:
         json.dump(community_closeness, c)
 
 def eigenCentrality():
     for index, row in df_node.iterrows():
+        topTenEigen = {}
         postID = str(row['Label'])
         community = row['modularity_class']
         if community not in community_eigen:
@@ -84,12 +83,15 @@ def eigenCentrality():
         else:
             eigens = community_eigen[community]
             eigens.update({postID: eigen.get(row['Id'])})
+            topTenEigen = dict(sorted(community_degree.items(), key=lambda x:x[1], reverse=True))
             community_eigen.update({community: eigens})
+        
     with open('./eigen.json', 'w+') as e:
         json.dump(community_eigen, e)
 
 def betweennessCentrality():
     for index, row in df_node.iterrows():
+        topTenBet = {}
         postID = str(row['Label'])
         community = row['modularity_class']
         if community not in community_betweeness:
@@ -97,77 +99,16 @@ def betweennessCentrality():
         else:
             betweens = community_betweeness[community]
             betweens.update({postID: betweeness.get(row['Id'])})
+            topTenBet = dict(sorted(community_degree.items(), key=lambda x:x[1], reverse=True))
             community_betweeness.update({community: betweens})
+        
     with open('./betweeness_unweighted.json', 'w+') as b:
         json.dump(community_betweeness, b)
 
-def avgDegree():
-    avgDeg_dict = {}
-    for com, node in community_degree.items():
-        avg_degree = 0
-        for val in node.values():
-            #print(val)
-            try:
-                avg_degree += val
-            except TypeError:
-                pass
-        avg_degree = avg_degree/len(com)
-        avgDeg_dict.update({com: avg_degree}) 
-    print(avgDeg_dict)
-
-def avgCloseness():
-    avgClo_dict = {}
-    for com, node in community_closeness.items():
-        avg_close = 0
-        for val in node.values():
-            #print(val)
-            try:
-                avg_close += val
-            except TypeError:
-                pass
-        avg_close = avg_close/len(com)
-        avgClo_dict.update({com: avg_close}) 
-    print(avgClo_dict)
-
-def avgEigen():
-    avgEig_dict = {}
-    for com, node in community_eigen.items():
-        avg_eigen = 0
-        for val in node.values():
-            #print(val)
-            try:
-                avg_eigen += val
-            except TypeError:
-                pass
-        avg_eigen = avg_eigen/len(com)
-        avgEig_dict.update({com: avg_eigen}) 
-    print(avgEig_dict)
-
-def avgBetween():
-    avgBet_dict = {}
-    for com, node in community_betweeness.items():
-        avg_bet = 0
-        for val in node.values():
-            #print(val)
-            try:
-                avg_bet += val
-            except TypeError:
-                pass
-        avg_bet = avg_bet/len(com)
-        avgBet_dict.update({com: avg_bet}) 
-    print(avgBet_dict)
-
 degreeCentrality()
-closenessCentrality()
-eigenCentrality()
+#closenessCentrality()
+#eigenCentrality()
 
 #Warning, Betweenness takes forever to run (over 4 hours and it still was not complete)
-betweennessCentrality()
-print("----------------------Average Degree for each community----------------------")
-avgDegree()
-print("----------------------Average Closeness for each community----------------------")
-avgCloseness()
-print("----------------------Average Eigen for each community----------------------")
-avgEigen()
-print("----------------------Average betweenness for each community----------------------")
-avgBetween()
+#betweennessCentrality()
+
