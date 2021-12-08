@@ -60,6 +60,8 @@ def countAuthors():
                     #if count > max:
                     #    max = count
                     #    tag = author
+
+            authorsCount = dict(sorted(authorsCount.items(), key=lambda x:x[1], reverse=True))
             topTen = dict(sorted(authorsCount.items(), key=lambda x:x[1], reverse=True))
             for x in list(topTen)[0:10]:
                 highest[x] = topTen[x]

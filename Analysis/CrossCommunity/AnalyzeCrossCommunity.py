@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 from itertools import islice
+from collections import Counter
 
 
 def take(n, iterable):
@@ -17,6 +18,8 @@ overlapped_communities = {}
 
 overlapped_nodes = {}
 
+community_to_community = {}
+
 # Get the most overlapped community
 for entry in cross_community_list:
 
@@ -26,6 +29,18 @@ for entry in cross_community_list:
         overlapped_communities[mod_class] = 1
     else:
         overlapped_communities[mod_class] = overlapped_communities[mod_class] + 1
+
+    if mod_class not in community_to_community:
+        community_to_community[mod_class] = cross_community_list[entry]["Target modularity"]
+    else:
+        community_to_community[mod_class] = community_to_community[mod_class] + (cross_community_list[entry]["Target modularity"])
+
+
+for entry in community_to_community:
+    community_to_community[entry] = {x:community_to_community[entry].count(x) for x in community_to_community[entry]}
+
+with open('./Community_to_community.json', 'w+') as f:
+    json.dump(community_to_community, f)
 
 
 df = pd.read_csv('../../Gephi/Gephi_Nodes_List.csv', dtype=str)
