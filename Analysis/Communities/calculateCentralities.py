@@ -20,15 +20,15 @@ def getValues():
         mod = row['modularity_class']
         #print("at if")
         if mod in out:
-            out[mod]["betweeness"][row["Id"]] = betweenness 
-            out[mod]["closeness"][row["Id"]] = closeness 
-            out[mod]["eigen"][row["Id"]] = eigen
+            out[mod]["betweeness"][row["Label"]] = betweenness 
+            out[mod]["closeness"][row["Label"]] = closeness 
+            out[mod]["eigen"][row["Label"]] = eigen
             
         else:
             out[mod] = {}
-            out[mod]["betweeness"] = {row["Id"]:betweenness} 
-            out[mod]["closeness"] = {row["Id"]:closeness} 
-            out[mod]["eigen"] = {row["Id"]:eigen}
+            out[mod]["betweeness"] = {row["Label"]:betweenness} 
+            out[mod]["closeness"] = {row["Label"]:closeness} 
+            out[mod]["eigen"] = {row["Label"]:eigen}
     #print(out[mod])
     #centralitySort = dict(sorted(out[mod].items(), key=lambda x:x[1], reverse=True))
     for com in out:
